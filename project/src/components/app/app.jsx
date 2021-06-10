@@ -10,15 +10,12 @@ import offerProps from '../offer-card/offer-card.prop';
 import reviewProps from '../comment-item/comment-item.prop';
 import {AppRoute} from '../../const';
 
-function App({offersCount, offers, reviews}) {
+function App({offers, reviews}) {
   return (
     <BrowserRouter>
       <Switch>
         <Route path={AppRoute.ROOT} exact>
-          <MainPage
-            offersCount={offersCount}
-            offers={offers}
-          />
+          <MainPage offers={offers}/>
         </Route>
         <Route path={AppRoute.FAVORITES} exact>
           <FavoritesPage offers={offers}/>
@@ -38,7 +35,6 @@ function App({offersCount, offers, reviews}) {
 }
 
 App.propTypes = {
-  offersCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(offerProps).isRequired,
   reviews: PropTypes.arrayOf(reviewProps).isRequired,
 };
