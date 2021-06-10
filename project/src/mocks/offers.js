@@ -91,4 +91,4 @@ export const offers = new Array(OFFERS_COUNT)
     };
 
     return offer;
-});
+  });

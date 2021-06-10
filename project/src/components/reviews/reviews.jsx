@@ -18,7 +18,7 @@ function Reviews({reviews}) {
 }
 
 Reviews.propTypes = {
-  reviews: PropTypes.arrayOf(reviewProps)
+  reviews: PropTypes.arrayOf(reviewProps),
 };
 
 export default Reviews;

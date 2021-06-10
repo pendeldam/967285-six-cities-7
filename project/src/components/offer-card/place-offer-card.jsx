@@ -27,11 +27,11 @@ function PlaceOfferCard(props) {
       <OfferCard {...restProps}/>
     </article>
   );
-};
+}
 
 PlaceOfferCard.propTypes = {
   offer: offerCardProp,
-  setActiveOffer: PropTypes.func.isRequired
+  setActiveOffer: PropTypes.func.isRequired,
 };
 
 export default PlaceOfferCard;

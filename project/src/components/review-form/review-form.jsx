@@ -1,19 +1,19 @@
 import React, {Fragment, useState} from 'react';
 
 const Rating = {
-  1: `terribly`,
-  2: `badly`,
-  3: `not bad`,
-  4: `good`,
-  5: `perfect`
+  1: 'terribly',
+  2: 'badly',
+  3: 'not bad',
+  4: 'good',
+  5: 'perfect',
 };
 
 function ReviewFrom() {
   const [review, setReview] = useState({
-    comment: ``,
+    comment: '',
     rating: null,
   });
-  
+
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={(evt) => evt.preventDefault()}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
@@ -50,7 +50,8 @@ function ReviewFrom() {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={!review.rating || review.comment.length < 50 || review.comment.length > 300}>
+          disabled={!review.rating || review.comment.length < 50 || review.comment.length > 300}
+        >
             Submit
         </button>
       </div>

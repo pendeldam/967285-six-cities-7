@@ -138,20 +138,7 @@ function OfferPage({offers, reviews}) {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            {offers && <OfferList
-              styles={{
-                main: `near-places__list places__list`
-              }}
-              render={() => {
-                return offers.slice(0, 3).map((offer) =>
-                  <NearestOfferCard
-                    key={offer.id}
-                    offer={offer}
-                    styles={{article: `near-places__card`}}
-                  />
-                );
-              }}
-            />}
+            {offers && <OfferList styles={{main: 'near-places__list places__list'}} render={() => offers.slice(0, 3).map((offer) => <NearestOfferCard key={offer.id} offer={offer} styles={{article: 'near-places__card'}}/>)}/>}
           </section>
         </div>
       </main>

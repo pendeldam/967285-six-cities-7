@@ -17,10 +17,10 @@ function NearestOfferCard(props) {
       <OfferCard {...restProps}/>
     </article>
   );
-};
+}
 
 NearestOfferCard.propTypes = {
-  offer: offerCardProp
+  offer: offerCardProp,
 };
 
 export default NearestOfferCard;

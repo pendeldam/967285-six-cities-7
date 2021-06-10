@@ -16,10 +16,10 @@ function FavoriteOfferCard(props) {
       <OfferCard {...restProps}/>
     </article>
   );
-};
+}
 
 FavoriteOfferCard.propTypes = {
-  offer: offerCardProp
+  offer: offerCardProp,
 };
 
 export default FavoriteOfferCard;

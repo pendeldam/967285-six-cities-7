@@ -11,11 +11,11 @@ function OfferCard({offer, styles}) {
 
   const bookmarkBtnStyle = `place-card__bookmark-button
     ${offer.is_favorite
-    ? `place-card__bookmark-button--active button`
-    : `button`}`;
+    ? 'place-card__bookmark-button--active button'
+    : 'button'}`;
 
   return (
-    <div className={`${styles.article === `favorites__card` ? styles.info : `place-card__info`}`}>
+    <div className={`${styles.article === 'favorites__card' ? styles.info : 'place-card__info'}`}>
       <div className="place-card__price-wrapper">
         <div className="place-card__price">
           <b className="place-card__price-value">&euro;{price}&nbsp;</b>
@@ -35,7 +35,7 @@ function OfferCard({offer, styles}) {
         </div>
       </div>
       <h2 className="place-card__name">
-      {<Link to={`${AppRoute.OFFER}/${id}`} onClick={() => history.push(`${AppRoute.OFFER}/${id}`)}>{title}</Link>}
+        {<Link to={`${AppRoute.OFFER}/${id}`} onClick={() => history.push(`${AppRoute.OFFER}/${id}`)}>{title}</Link>}
       </h2>
       <p className="place-card__type">{type}</p>
     </div>

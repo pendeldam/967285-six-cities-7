@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Rating} from '../../const.js';
 import {formatDate} from '../../utils';
 import reviewProps from '../review-item/review-item.prop';
@@ -29,16 +28,16 @@ function ReviewItem({review}) {
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime={date.toISOString().split(`T`)[0]}>
+        <time className="reviews__time" dateTime={date.toISOString().split('T')[0]}>
           {formatDate(date)}
         </time>
       </div>
     </li>
   );
-};
+}
 
 ReviewItem.propTypes = {
-  reviews: PropTypes.arrayOf(reviewProps)
+  review: reviewProps,
 };
 
 export default ReviewItem;

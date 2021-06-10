@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import OffersList from '../offer-list/offer-list';
 import PlaceOfferCard from '../offer-card/place-offer-card';
 import offerCardProp from '../offer-card/offer-card.prop';
 
-const CityPlaces = ({offers}) => {
+function CityPlaces({offers}) {
   const [_activeOffer, setActiveOffer] = useState(null);
 
   return (
@@ -28,21 +29,12 @@ const CityPlaces = ({offers}) => {
       </form>
 
       <OffersList
-        styles={{main: `cities__places-list places__list tabs__content`}}
-        render={() => {
-          return offers.map((offer) =>
-            <PlaceOfferCard
-              styles={{article: `cities__place-card`}}
-              key={offer.id}
-              offer={offer}
-              setActiveOffer={setActiveOffer}
-            />
-          );
-        }}
+        styles={{main: 'cities__places-list places__list tabs__content'}}
+        render={() => offers.map((offer) => <PlaceOfferCard styles={{article: 'cities__place-card'}} key={offer.id} offer={offer} setActiveOffer={setActiveOffer}/>)}
       />
     </section>
   );
-};
+}
 
 CityPlaces.propTypes = {
   offers: PropTypes.arrayOf(offerCardProp).isRequired,

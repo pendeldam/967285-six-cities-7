@@ -9,25 +9,19 @@ import {AppRoute} from '../../const';
 
 function FavoritesPage({offers}) {
   return (
-    <div className={!offers.length
-      ? `page page--favorites-empty`
-      : `page`
-    }>
+    <div className={!offers.length ? 'page page--favorites-empty' : 'page'}>
       <Header/>
-      <main className={!offers.length
-        ? `page__main page__main--favorites page__main--favorites-empty`
-        : `page__main page__main--favorites`
-      }>
+      <main className={!offers.length ? 'page__main page__main--favorites page__main--favorites-empty' : 'page__main page__main--favorites'}>
         <div className="page__favorites-container container">
-          {!offers.length
-            ? <section className="favorites favorites--empty">
+          {!offers.length ?
+            <section className="favorites favorites--empty">
               <h1 className="visually-hidden">Favorites (empty)</h1>
               <div className="favorites__status-wrapper">
                 <b className="favorites__status">Nothing yet saved.</b>
                 <p className="favorites__status-description">Save properties to narrow down search or plan yor future trips.</p>
               </div>
-            </section>
-            : <section className="favorites">
+            </section> :
+            <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
               <ul className="favorites__list">
                 <li className="favorites__locations-items">
@@ -40,24 +34,13 @@ function FavoritesPage({offers}) {
                   </div>
                   <OffersList
                     styles={{
-                      main: `favorites__places`,
+                      main: 'favorites__places',
                     }}
-                    render={() => {
-                      return offers.map((offer) =>
-                        <FavoriteOfferCard
-                          key={offer.id}
-                          offer={offer}
-                          styles={{
-                            article: `favorites__card`,
-                            info: `favorites__card-info place-card__info`}}
-                        />
-                      );
-                    }}
+                    render={() => offers.map((offer) => <FavoriteOfferCard key={offer.id} offer={offer} styles={{article: 'favorites__card', info: 'favorites__card-info place-card__info'}}/>)}
                   />
                 </li>
               </ul>
-            </section>
-          }
+            </section>}
         </div>
       </main>
       <footer className="footer container">
