@@ -1,5 +1,7 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
+import offerProps from '../offer-card/offer-card.prop';
 
 const Rating = {
   1: '20%',
@@ -9,15 +11,15 @@ const Rating = {
   5: '100%',
 };
 
-function OfferCard({offer}) {
-  const {price, type, rating, isPremium, img, description} = offer;
-
+function OfferCard({offer, setActiveOffer}) {
+  const {id, price, type, rating, is_premium, preview_image, title} = offer;
+  
   return (
-    <article className="cities__place-card place-card">
-      {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
+    <article className="cities__place-card place-card" onMouseEnter={() => {setActiveOffer(id)}}>
+      {is_premium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={img} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src={preview_image.url} width="260" height="200" alt="Place image"/>
         </a>
       </div>
       <div className="place-card__info">
@@ -40,7 +42,7 @@ function OfferCard({offer}) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{description}</a>
+          <a href="#">{title}</a>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -49,14 +51,8 @@ function OfferCard({offer}) {
 }
 
 OfferCard.propTypes = {
-  offer: PropTypes.shape({
-    price: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    img: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-  }).isRequired,
+  offer: offerProps,
+  setActiveOffer: PropTypes.func.isRequired,
 };
 
 export default OfferCard;

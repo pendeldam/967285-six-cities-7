@@ -6,20 +6,25 @@ import LoginPage from '../login-page/login-page';
 import OfferPage from '../offer-page/offer-page';
 import FavoritesPage from '../favorites-page/favorites-page';
 import ErrorPage from '../error-page/error-page';
+import offerProps from '../offer-card/offer-card.prop';
+import reviewProps from '../comment-item/comment-item.prop';
 import {AppRoute} from '../../const';
 
-function App({offersCount}) {
+function App({offersCount, offers, reviews}) {
   return (
     <BrowserRouter>
       <Switch>
         <Route path={AppRoute.ROOT} exact>
-          <MainPage offersCount={offersCount}/>
+          <MainPage
+            offersCount={offersCount}
+            offers={offers}
+          />
         </Route>
         <Route path={AppRoute.FAVORITES} exact>
-          <FavoritesPage/>
+          <FavoritesPage offers={offers}/>
         </Route>
         <Route path={`${AppRoute.OFFER}/:id`}>
-          <OfferPage/>
+          <OfferPage reviews={reviews}/>
         </Route>
         <Route path={AppRoute.LOGIN} exact>
           <LoginPage/>
@@ -34,6 +39,8 @@ function App({offersCount}) {
 
 App.propTypes = {
   offersCount: PropTypes.number.isRequired,
+  offers: PropTypes.arrayOf(offerProps).isRequired,
+  reviews: PropTypes.arrayOf(reviewProps).isRequired,
 };
 
 export default App;

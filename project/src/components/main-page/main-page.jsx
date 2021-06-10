@@ -1,57 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../header/header';
-import OfferCard from '../offer-card/offer-card';
+import OfferList from '../offer-list/offer-list';
+import offerProps from '../offer-card/offer-card.prop';
 
-const offers = [
-  {
-    id: 0,
-    price: 120,
-    type: 'Apartment',
-    isPremium: true,
-    rating: 4,
-    img: 'img/apartment-01.jpg',
-    description: 'Beautiful & luxurious apartment at great location',
-  },
-  {
-    id: 1,
-    price: 80,
-    type: 'Private room',
-    isPremium: false,
-    rating: 4,
-    img: 'img/room.jpg',
-    description: 'Wood and stone place',
-  },
-  {
-    id: 2,
-    price: 132,
-    type: 'Apartment',
-    isPremium: false,
-    rating: 4,
-    img: 'img/apartment-02.jpg',
-    description: 'Canal View Prinsengracht',
-  },
-  {
-    id: 3,
-    price: 180,
-    type: 'Apartment',
-    isPremium: true,
-    rating: 5,
-    img: 'img/apartment-03.jpg',
-    description: 'Nice, cozy, warm big bed apartment',
-  },
-  {
-    id: 4,
-    price: 80,
-    type: 'Private room',
-    isPremium: false,
-    rating: 4,
-    img: 'img/room.jpg',
-    description: 'Wood and stone place',
-  },
-];
-
-function MainPage({offersCount}) {
+function MainPage({offersCount, offers}) {
   return (
     <div className="page page--gray page--main">
       <Header/>
@@ -113,9 +66,7 @@ function MainPage({offersCount}) {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {offers.map((offer) => <OfferCard offer={offer} key={offer.id}/>)}
-              </div>
+              <OfferList offers={offers}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
@@ -129,6 +80,7 @@ function MainPage({offersCount}) {
 
 MainPage.propTypes = {
   offersCount: PropTypes.number.isRequired,
+  offers: PropTypes.arrayOf(offerProps).isRequired,
 };
 
 export default MainPage;
