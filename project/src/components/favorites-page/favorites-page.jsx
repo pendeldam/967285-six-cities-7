@@ -1,9 +1,11 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Header from '../header/header';
 import OffersList from '../offer-list/offer-list';
 import FavoriteOfferCard from '../offer-card/favorite-offer-card';
 import offerProps from '../offer-card/offer-card.prop';
+import {AppRoute} from '../../const';
 
 function FavoritesPage({offers}) {
   return (
@@ -59,9 +61,9 @@ function FavoritesPage({offers}) {
         </div>
       </main>
       <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
+        <Link className="footer__logo-link" to={`${AppRoute.ROOT}`}>
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
-        </a>
+        </Link>
       </footer>
     </div>
   );
