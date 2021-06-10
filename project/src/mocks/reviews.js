@@ -6,7 +6,7 @@ const REVIEWS_COUNT = 3;
 
 const AUTHOR_NAMES = ['Paul', 'Anna', 'Nicole', 'Sam', 'Alex'];
 
-const AUTHOR_AVATAR_URL = 'https://api.adorable.io/avatars/128';
+const AUTHOR_AVATAR_URL = 'https://i.pravatar.cc/128';
 
 const REVIEW_TEXT = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra. Aliquam id orci ut lectus varius viverra. Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante. Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum. Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui. Sed sed nisi sed augue convallis suscipit in sed felis. Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus. In rutrum ac purus sit amet tempus.';
 
@@ -33,7 +33,7 @@ export const reviews = new Array(REVIEWS_COUNT)
       date: getRandomDate(),
       user: {
         name: getRandomArrayItem(AUTHOR_NAMES),
-        avatar_url: `${AUTHOR_AVATAR_URL}/${Math.random()}`,
+        avatar_url: `${AUTHOR_AVATAR_URL}?rnd=${Math.random()}`,
         id: nanoid(),
         is_pro: Boolean(Math.random() > 0.5),
       },

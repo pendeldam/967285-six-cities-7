@@ -7,7 +7,7 @@ import OfferPage from '../offer-page/offer-page';
 import FavoritesPage from '../favorites-page/favorites-page';
 import ErrorPage from '../error-page/error-page';
 import offerProps from '../offer-card/offer-card.prop';
-import reviewProps from '../comment-item/comment-item.prop';
+import reviewProps from '../review-item/review-item.prop';
 import {AppRoute} from '../../const';
 
 function App({offers, reviews}) {
@@ -21,7 +21,7 @@ function App({offers, reviews}) {
           <FavoritesPage offers={offers}/>
         </Route>
         <Route path={`${AppRoute.OFFER}/:id`}>
-          <OfferPage reviews={reviews}/>
+          <OfferPage offers={offers} reviews={reviews}/>
         </Route>
         <Route path={AppRoute.LOGIN} exact>
           <LoginPage/>

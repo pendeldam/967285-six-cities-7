@@ -1,3 +1,5 @@
+export const formatDate = (date) => new Date(date).toLocaleDateString(`en-US`, {month: `long`, year: `numeric`});
+
 export const getRandomIntegerNumber = (min, max) =>(Math.floor(Math.random() * (max - min) + min));
 
 export const getRandomArrayItem = (array) => array[getRandomIntegerNumber(0, array.length)];
