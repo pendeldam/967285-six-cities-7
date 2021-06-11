@@ -4,7 +4,7 @@ import offerCardProp from './offer-card.prop';
 
 function FavoriteOfferCard(props) {
   const {offer} = props;
-  const restProps = Object.assign({}, props);
+  const restProps = {...props};
 
   return (
     <article className="favorites__card place-card">
