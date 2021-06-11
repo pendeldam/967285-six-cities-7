@@ -1,12 +1,11 @@
 /* eslint-disable camelcase */
 import React from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import offerProps from '../offer-card/offer-card.prop';
 import stylesProp from './styles.prop';
 import {AppRoute, Rating} from '../../const';
 
 function OfferCard({offer, styles}) {
-  const history = useHistory();
   const {id, price, type, rating, title} = offer;
 
   const bookmarkBtnStyle = `place-card__bookmark-button
@@ -35,7 +34,7 @@ function OfferCard({offer, styles}) {
         </div>
       </div>
       <h2 className="place-card__name">
-        {<Link to={`${AppRoute.OFFER}/${id}`} onClick={() => history.push(`${AppRoute.OFFER}/${id}`)}>{title}</Link>}
+        {<Link to={`${AppRoute.OFFER}/${id}`}>{title}</Link>}
       </h2>
       <p className="place-card__type">{type}</p>
     </div>

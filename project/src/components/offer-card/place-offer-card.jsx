@@ -5,7 +5,6 @@ import offerCardProp from './offer-card.prop';
 
 function PlaceOfferCard(props) {
   const {offer, setActiveOffer} = props;
-  const restProps = {...props};
 
   return (
     <article
@@ -24,7 +23,7 @@ function PlaceOfferCard(props) {
         </a>
       </div>
 
-      <OfferCard {...restProps}/>
+      <OfferCard {...props}/>
     </article>
   );
 }

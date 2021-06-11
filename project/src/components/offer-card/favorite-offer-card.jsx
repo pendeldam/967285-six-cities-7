@@ -4,7 +4,6 @@ import offerCardProp from './offer-card.prop';
 
 function FavoriteOfferCard(props) {
   const {offer} = props;
-  const restProps = {...props};
 
   return (
     <article className="favorites__card place-card">
@@ -13,7 +12,7 @@ function FavoriteOfferCard(props) {
           <img className="place-card__image" src={offer.preview_image.url} width="150" height="110" alt="Place image"/>
         </a>
       </div>
-      <OfferCard {...restProps}/>
+      <OfferCard {...props}/>
     </article>
   );
 }

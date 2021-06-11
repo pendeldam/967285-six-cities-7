@@ -4,7 +4,6 @@ import offerCardProp from './offer-card.prop';
 
 function NearestOfferCard(props) {
   const {offer} = props;
-  const restProps = {...props};
 
   return (
     <article className="near-places__card place-card">
@@ -13,7 +12,7 @@ function NearestOfferCard(props) {
           <img className="place-card__image" src={offer.preview_image.url} width="260" height="200" alt="Place image"/>
         </a>
       </div>
-      <OfferCard {...restProps}/>
+      <OfferCard {...props}/>
     </article>
   );
 }
