@@ -1,9 +1,31 @@
 /* eslint-disable camelcase */
 import {nanoid} from 'nanoid';
 import {getRandomIntegerNumber, getRandomArrayItem, getRandomArray} from '../utils';
-import {CITIES} from '../const';
 
 const OFFERS_COUNT = 4;
+
+const OFFER_COORDS = [
+  {
+    latitude: 52.3909553943508,
+    longtitude: 4.85309666406198,
+    zoom: 8,
+  },
+  {
+    latitude: 52.369553943508,
+    longtitude: 4.85309666406198,
+    zoom: 8,
+  },
+  {
+    latitude: 52.3909553943508,
+    longtitude: 4.929309666406198,
+    zoom: 8,
+  },
+  {
+    latitude: 52.3809553943508,
+    longtitude: 4.939309666406198,
+    zoom: 8,
+  },
+];
 
 const OFFER_DESCRIPTION = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra. Aliquam id orci ut lectus varius viverra. Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante. Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum. Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui. Sed sed nisi sed augue convallis suscipit in sed felis. Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus. In rutrum ac purus sit amet tempus.';
 
@@ -54,7 +76,7 @@ const getRandomAmenity = () => getRandomArrayItem(OFFER_AMENITIES);
 
 export const offers = new Array(OFFERS_COUNT)
   .fill('')
-  .map((offer) => {
+  .map((offer, index) => {
     offer = {
       id: nanoid(),
       price: getRandomIntegerNumber(100, 1001),
@@ -76,18 +98,14 @@ export const offers = new Array(OFFERS_COUNT)
         is_pro: Boolean(Math.random() > 0.5),
       },
       city: {
-        name: getRandomArrayItem(CITIES),
+        name: 'Amsterdam',
         location: {
           zoom: 10,
           latitude: 52.370216,
-          longitude: 4.895168,
+          longtitude: 4.895168,
         },
       },
-      location: {
-        latitude: 52.35514938496378,
-        longitude: 4.673877537499948,
-        zoom: 8,
-      },
+      location: OFFER_COORDS[index],
     };
 
     return offer;

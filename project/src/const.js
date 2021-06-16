@@ -16,3 +16,8 @@ export const Rating = {
   4: '80%',
   5: '100%',
 };
+
+const URL_MARKER_DEFAULT = '../img/pin.svg';
+const URL_MARKER_ACTIVE = '../img/pin-active.svg';
+
+export {URL_MARKER_ACTIVE, URL_MARKER_DEFAULT};

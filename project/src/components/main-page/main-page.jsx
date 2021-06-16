@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../header/header';
-import CityPlaces from '../city-places/city-places';
+import CitiesContainer from '../cities-container/cities-container';
 import offerProps from '../offer-card/offer-card.prop';
 
 function MainPage({offers}) {
@@ -14,7 +14,7 @@ function MainPage({offers}) {
           <section className="locations container">
             <ul className="locations__list tabs__list">
               <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active" href="#">
+                <a className="locations__item-link tabs__item" href="#">
                   <span>Paris</span>
                 </a>
               </li>
@@ -29,7 +29,7 @@ function MainPage({offers}) {
                 </a>
               </li>
               <li className="locations__item">
-                <a className="locations__item-link tabs__item">
+                <a className="locations__item-link tabs__item tabs__item--active">
                   <span>Amsterdam</span>
                 </a>
               </li>
@@ -46,14 +46,7 @@ function MainPage({offers}) {
             </ul>
           </section>
         </div>
-        <div className="cities">
-          <div className="cities__places-container container">
-            <CityPlaces offers={offers}/>
-            <div className="cities__right-section">
-              <section className="cities__map map"></section>
-            </div>
-          </div>
-        </div>
+        <CitiesContainer city={offers[0].city} offers={offers}/>
       </main>
     </div>
   );

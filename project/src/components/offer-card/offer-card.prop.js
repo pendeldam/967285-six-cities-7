@@ -1,5 +1,7 @@
 /* eslint-disable camelcase */
 import PropTypes from 'prop-types';
+import cityProp from '../cities-container/city.prop';
+import locationProp from '../cities-container/location.prop';
 
 export default PropTypes.shape({
   id: PropTypes.string.isRequired,
@@ -27,4 +29,6 @@ export default PropTypes.shape({
     avatar_url: PropTypes.string.isRequired,
     is_pro: PropTypes.bool.isRequired,
   }).isRequired,
+  city: cityProp,
+  location: locationProp,
 }).isRequired;
