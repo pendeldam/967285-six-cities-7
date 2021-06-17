@@ -100,7 +100,7 @@ export const offers = new Array(OFFERS_COUNT)
       city: {
         name: 'Amsterdam',
         location: {
-          zoom: 10,
+          zoom: 12,
           latitude: 52.370216,
           longtitude: 4.895168,
         },

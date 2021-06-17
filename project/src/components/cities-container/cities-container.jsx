@@ -15,7 +15,7 @@ function CitiesContainer({city, offers}) {
             <CityPlaces city={city} offers={offers}/>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={city} offers={offers} style={{minHeight: 980}}/>
+                <Map city={city} offers={offers}/>
               </section>
             </div>
           </Fragment>
