@@ -30,7 +30,7 @@ function Map({city, offers}) {
     }
   }, [map, offers]);
 
-  return <div id="map" ref={mapRef} style={{minHeight: 980}}></div>;
+  return <div id="map" ref={mapRef} style={{height: '100%'}}></div>;
 }
 
 Map.propTypes = {

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../header/header';
-import Reviews from '../reviews/reviews';
+import ReviewList from '../review-list/review-list';
+import Map from '../../components/map/map';
 import OfferList from '../offer-list/offer-list';
 import NearestOfferCard from '../offer-card/nearest-offer-card';
 import offerProps from '../offer-card/offer-card.prop';
@@ -130,15 +131,32 @@ function OfferPage({offers, reviews}) {
                   </p>
                 </div>
               </div>
-              <Reviews reviews={reviews}/>
+              <ReviewList reviews={reviews}/>
             </div>
           </div>
-          <section className="property__map map"></section>
+          <section className="property__map map">
+            <Map
+              city={offers[0].city}
+              offers={offers.slice(0, 3)}
+            />
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            {offers && <OfferList styles={{main: 'near-places__list places__list'}} render={() => offers.slice(0, 3).map((offer) => <NearestOfferCard key={offer.id} offer={offer} styles={{article: 'near-places__card'}}/>)}/>}
+            {offers &&
+              <OfferList
+                styles={{main: 'near-places__list places__list'}}
+                render={() => (
+                  offers.slice(0, 3).map((offer) => (
+                    <NearestOfferCard
+                      key={offer.id}
+                      offer={offer}
+                      styles={{article: 'near-places__card'}}
+                    />
+                  ))
+                )}
+              />}
           </section>
         </div>
       </main>
