@@ -6,22 +6,20 @@ import LoginPage from '../login-page/login-page';
 import OfferPage from '../offer-page/offer-page';
 import FavoritesPage from '../favorites-page/favorites-page';
 import ErrorPage from '../error-page/error-page';
-import offerProps from '../offer-card/offer-card.prop';
-import reviewProps from '../review-item/review-item.prop';
 import {AppRoute} from '../../const';
 
-function App({offers, reviews}) {
+function App() {
   return (
     <BrowserRouter>
       <Switch>
         <Route path={AppRoute.ROOT} exact>
-          <MainPage offers={offers}/>
+          <MainPage/>
         </Route>
         <Route path={AppRoute.FAVORITES} exact>
-          <FavoritesPage offers={offers}/>
+          <FavoritesPage/>
         </Route>
         <Route path={`${AppRoute.OFFER}/:id`}>
-          <OfferPage offers={offers} reviews={reviews}/>
+          <OfferPage/>
         </Route>
         <Route path={AppRoute.LOGIN} exact>
           <LoginPage/>
@@ -34,9 +32,6 @@ function App({offers, reviews}) {
   );
 }
 
-App.propTypes = {
-  offers: PropTypes.arrayOf(offerProps).isRequired,
-  reviews: PropTypes.arrayOf(reviewProps).isRequired,
-};
+App.propTypes = {};
 
 export default App;

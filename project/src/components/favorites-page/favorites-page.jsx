@@ -33,10 +33,18 @@ function FavoritesPage({offers}) {
                     </div>
                   </div>
                   <OffersList
-                    styles={{
-                      main: 'favorites__places',
-                    }}
-                    render={() => offers.map((offer) => <FavoriteOfferCard key={offer.id} offer={offer} styles={{article: 'favorites__card', info: 'favorites__card-info place-card__info'}}/>)}
+                    styles={{main: 'favorites__places'}}
+                    render={() =>
+                      offers.map((offer) => (
+                        <FavoriteOfferCard
+                          key={offer.id}
+                          offer={offer}
+                          styles={{
+                            article: 'favorites__card',
+                            info: 'favorites__card-info place-card__info',
+                          }}
+                        />
+                      ))}
                   />
                 </li>
               </ul>

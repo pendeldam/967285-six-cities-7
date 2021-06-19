@@ -1,31 +1,9 @@
 /* eslint-disable camelcase */
 import {nanoid} from 'nanoid';
 import {getRandomIntegerNumber, getRandomArrayItem, getRandomArray} from '../utils';
+import {CITIES} from '../const';
 
-const OFFERS_COUNT = 4;
-
-const OFFER_COORDS = [
-  {
-    latitude: 52.3909553943508,
-    longtitude: 4.85309666406198,
-    zoom: 8,
-  },
-  {
-    latitude: 52.369553943508,
-    longtitude: 4.85309666406198,
-    zoom: 8,
-  },
-  {
-    latitude: 52.3909553943508,
-    longtitude: 4.929309666406198,
-    zoom: 8,
-  },
-  {
-    latitude: 52.3809553943508,
-    longtitude: 4.939309666406198,
-    zoom: 8,
-  },
-];
+const OFFERS_COUNT = 24;
 
 const OFFER_DESCRIPTION = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra. Aliquam id orci ut lectus varius viverra. Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante. Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum. Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui. Sed sed nisi sed augue convallis suscipit in sed felis. Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus. In rutrum ac purus sit amet tempus.';
 
@@ -66,6 +44,19 @@ const OFFER_AMENITIES = [
 const HOST_NAMES = ['Paul', 'Anna', 'Nicolette', 'Sam', 'Alex'];
 const HOST_AVATAR_URL = 'https://api.adorable.io/avatars/128';
 
+const getRandomCoords = (city) => {
+  const randomNumber = getRandomIntegerNumber(10e5, 30e5) / 10e8;
+  const sign = Boolean(Math.random() > 0.5) ? 1 : -1;
+  const latitude = city.location.latitude + (randomNumber * sign);
+  const longtitude = city.location.longtitude + (randomNumber * sign);
+
+  return {
+    latitude,
+    longtitude,
+    zoom: 8,
+  };
+};
+
 const getRandomPhoto = () => ({
   url: `img/${getRandomArrayItem(OFFER_IMAGES)}.jpg`,
   alt: getRandomArrayItem(OFFER_DESCRIPTION.split('.')),
@@ -76,7 +67,9 @@ const getRandomAmenity = () => getRandomArrayItem(OFFER_AMENITIES);
 
 export const offers = new Array(OFFERS_COUNT)
   .fill('')
-  .map((offer, index) => {
+  .map((offer) => {
+    const city = getRandomArrayItem(CITIES);
+
     offer = {
       id: nanoid(),
       price: getRandomIntegerNumber(100, 1001),
@@ -97,15 +90,8 @@ export const offers = new Array(OFFERS_COUNT)
         avatar_url: `${HOST_AVATAR_URL}/${Math.random()}`,
         is_pro: Boolean(Math.random() > 0.5),
       },
-      city: {
-        name: 'Amsterdam',
-        location: {
-          zoom: 12,
-          latitude: 52.370216,
-          longtitude: 4.895168,
-        },
-      },
-      location: OFFER_COORDS[index],
+      city,
+      location: getRandomCoords(city),
     };
 
     return offer;

@@ -28,7 +28,7 @@ function Map({city, offers}) {
         }).addTo(map);
       });
     }
-  }, [map, offers]);
+  }, [map, offers, city]);
 
   return <div id="map" ref={mapRef} style={{height: '100%'}}></div>;
 }
