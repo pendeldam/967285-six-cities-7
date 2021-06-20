@@ -136,7 +136,6 @@ function OfferPage({offers, reviews}) {
           </div>
           <section className="property__map map">
             <Map
-              city={offers[0].city}
               offers={offers.slice(0, 3)}
             />
           </section>

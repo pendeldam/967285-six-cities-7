@@ -12,9 +12,9 @@ import {getCityOffers} from '../../store/selectors';
 function MainPage({city, offers, changeCity}) {
   return (
     <div
-      className={offers ?
-        `page page--gray page--main`
-        : `page page--gray page--main page__main--index-empty`}
+      className={offers
+        ? 'page page--gray page--main'
+        : 'page page--gray page--main page__main--index-empty'}
     >
       <Header/>
       <main className="page__main page__main--index">
@@ -45,7 +45,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeCity(city) {
     dispatch(ActionCreator.changeCity(city));
-  }
+  },
 });
 
 export {MainPage};

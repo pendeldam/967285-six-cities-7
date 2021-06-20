@@ -7,16 +7,17 @@ function CitiesList({city, changeCity}) {
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        {CITIES.map((it, index) => (
+        {CITIES.map((it) => (
           <li
-          key={index}
-          className="locations__item">
+            key={it.name}
+            className="locations__item"
+          >
             <a
+              href="#"
               onClick={() => changeCity(it)}
               className={it.name === city.name
-              ? `locations__item-link tabs__item tabs__item--active`
-              : `locations__item-link tabs__item`}
-              href="#"
+                ? 'locations__item-link tabs__item tabs__item--active'
+                : 'locations__item-link tabs__item'}
             >
               <span>{it.name}</span>
             </a>

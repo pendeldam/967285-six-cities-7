@@ -8,6 +8,6 @@ export const getRandomArray = (length, cb) => new Array(length)
   .fill('')
   .map(cb);
 
-export const getCityOffers = (city, offers) => {
-  return offers.filter((offer) => offer.city.name === city.name);
-};
+export const getCityOffers = (city, offers) => (
+  offers.filter((offer) => offer.city.name === city.name)
+);

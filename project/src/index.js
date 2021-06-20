@@ -8,7 +8,7 @@ import {reducer} from './store/reducer';
 
 const store = createStore(
   reducer,
-  composeWithDevTools()
+  composeWithDevTools(),
 );
 
 ReactDOM.render(

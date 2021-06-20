@@ -11,8 +11,6 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.LOAD_OFFERS:
-      return {...state, offers: action.payload};
     case ActionType.CHANGE_CITY:
       return {...state, city: action.payload};
     default:

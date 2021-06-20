@@ -1,9 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import MainPage from '../main-page/main-page';
 import LoginPage from '../login-page/login-page';
-import OfferPage from '../offer-page/offer-page';
+// import OfferPage from '../offer-page/offer-page';
 import FavoritesPage from '../favorites-page/favorites-page';
 import ErrorPage from '../error-page/error-page';
 import {AppRoute} from '../../const';
@@ -19,7 +18,7 @@ function App() {
           <FavoritesPage/>
         </Route>
         <Route path={`${AppRoute.OFFER}/:id`}>
-          <OfferPage/>
+          {/* <OfferPage/> */}
         </Route>
         <Route path={AppRoute.LOGIN} exact>
           <LoginPage/>
@@ -31,7 +30,5 @@ function App() {
     </BrowserRouter>
   );
 }
-
-App.propTypes = {};
 
 export default App;

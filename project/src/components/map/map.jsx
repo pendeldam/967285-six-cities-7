@@ -20,9 +20,11 @@ function Map({city, offers}) {
   useEffect(() => {
     if (map) {
       offers.forEach((offer) => {
+        const {latitude, longtitude} = offer.location;
+
         leaflet.marker({
-          lat: offer.location.latitude,
-          lng: offer.location.longtitude,
+          lat: latitude,
+          lng: longtitude,
         }, {
           icon: defaultCustomIcon,
         }).addTo(map);

@@ -46,7 +46,7 @@ const HOST_AVATAR_URL = 'https://api.adorable.io/avatars/128';
 
 const getRandomCoords = (city) => {
   const randomNumber = getRandomIntegerNumber(10e5, 30e5) / 10e8;
-  const sign = Boolean(Math.random() > 0.5) ? 1 : -1;
+  const sign = Math.random() > 0.5 ? 1 : -1;
   const latitude = city.location.latitude + (randomNumber * sign);
   const longtitude = city.location.longtitude + (randomNumber * sign);
 
