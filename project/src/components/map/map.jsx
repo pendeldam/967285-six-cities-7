@@ -19,6 +19,12 @@ function Map({city, offers}) {
 
   useEffect(() => {
     if (map) {
+      map.setView([
+        city.location.latitude,
+        city.location.longtitude],
+      city.location.zoom,
+      );
+
       offers.forEach((offer) => {
         const {latitude, longtitude} = offer.location;
 
