@@ -1,13 +1,16 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import Header from '../header/header';
 import OffersList from '../offer-list/offer-list';
 import FavoriteOfferCard from '../offer-card/favorite-offer-card';
+import cityProp from '../cities-container/city.prop';
 import offerProps from '../offer-card/offer-card.prop';
 import {AppRoute} from '../../const';
+import {getFavorites} from '../../store/selectors';
 
-function FavoritesPage({offers}) {
+function FavoritesPage({city, offers}) {
   return (
     <div className={!offers.length ? 'page page--favorites-empty' : 'page'}>
       <Header/>
@@ -28,15 +31,23 @@ function FavoritesPage({offers}) {
                   <div className="favorites__locations locations locations--current">
                     <div className="locations__item">
                       <a className="locations__item-link" href="#">
-                        <span>Paris</span>
+                        <span>{city.name}</span>
                       </a>
                     </div>
                   </div>
                   <OffersList
-                    styles={{
-                      main: 'favorites__places',
-                    }}
-                    render={() => offers.map((offer) => <FavoriteOfferCard key={offer.id} offer={offer} styles={{article: 'favorites__card', info: 'favorites__card-info place-card__info'}}/>)}
+                    styles={{main: 'favorites__places'}}
+                    render={() =>
+                      offers.map((offer) => (
+                        <FavoriteOfferCard
+                          key={offer.id}
+                          offer={offer}
+                          styles={{
+                            article: 'favorites__card',
+                            info: 'favorites__card-info place-card__info',
+                          }}
+                        />
+                      ))}
                   />
                 </li>
               </ul>
@@ -53,7 +64,15 @@ function FavoritesPage({offers}) {
 }
 
 FavoritesPage.propTypes = {
+  city: cityProp,
   offers: PropTypes.arrayOf(offerProps).isRequired,
 };
 
-export default FavoritesPage;
+const mapStateToProps = (state) => ({
+  city: state.city,
+  offers: getFavorites(state),
+});
+
+export {FavoritesPage};
+
+export default connect(mapStateToProps)(FavoritesPage);

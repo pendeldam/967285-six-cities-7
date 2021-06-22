@@ -19,16 +19,20 @@ function Map({city, offers}) {
 
   useEffect(() => {
     if (map) {
+      map.flyTo([city.location.latitude, city.location.longtitude]);
+
       offers.forEach((offer) => {
+        const {latitude, longtitude} = offer.location;
+
         leaflet.marker({
-          lat: offer.location.latitude,
-          lng: offer.location.longtitude,
+          lat: latitude,
+          lng: longtitude,
         }, {
           icon: defaultCustomIcon,
         }).addTo(map);
       });
     }
-  }, [map, offers]);
+  }, [map, offers, city]);
 
   return <div id="map" ref={mapRef} style={{height: '100%'}}></div>;
 }

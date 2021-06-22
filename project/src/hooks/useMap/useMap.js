@@ -10,12 +10,8 @@ function useMap(mapRef, city) {
 
       const instance = leaflet.map(mapRef.current, {
         center: [latitude, longtitude],
-        zoomControl: false,
-        marker: true,
         zoom,
       });
-
-      instance.setView([latitude, longtitude], zoom);
 
       leaflet
         .tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
