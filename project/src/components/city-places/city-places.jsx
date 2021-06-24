@@ -10,9 +10,7 @@ import cityProp from '../cities-container/city.prop';
 import offerCardProp from '../offer-card/offer-card.prop';
 import {sortOffers} from '../../sort';
 
-function CityPlaces({city, offers, sortType, setSortType}) {
-  const [_activeOffer, setActiveOffer] = useState(null);
-
+function CityPlaces({city, offers, sortType, setSortType, setActiveOffer}) {
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
@@ -44,6 +42,7 @@ CityPlaces.propTypes = {
   offers: PropTypes.arrayOf(offerCardProp).isRequired,
   sortType: PropTypes.string.isRequired,
   setSortType: PropTypes.func.isRequired,
+  setActiveOffer: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({sortType}) => ({

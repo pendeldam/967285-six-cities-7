@@ -5,14 +5,20 @@ import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/useMap/useMap';
 import cityProp from '../cities-container/city.prop';
 import offerProps from '../offer-card/offer-card.prop';
-import {URL_MARKER_DEFAULT} from '../../const';
+import {URL_MARKER_DEFAULT, URL_MARKER_ACTIVE} from '../../const';
 
-function Map({city, offers}) {
+function Map({city, offers, activeOffer}) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
   const defaultCustomIcon = leaflet.icon({
     iconUrl: URL_MARKER_DEFAULT,
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+  });
+
+  const activeCustomIcon = leaflet.icon({
+    iconUrl: URL_MARKER_ACTIVE,
     iconSize: [30, 30],
     iconAnchor: [15, 30],
   });
@@ -28,11 +34,13 @@ function Map({city, offers}) {
           lat: latitude,
           lng: longtitude,
         }, {
-          icon: defaultCustomIcon,
+          icon: (activeOffer && offer.id === activeOffer.id)
+            ? activeCustomIcon
+            : defaultCustomIcon,
         }).addTo(map);
       });
     }
-  }, [map, offers, city]);
+  }, [map, offers, activeOffer]);
 
   return <div id="map" ref={mapRef} style={{height: '100%'}}></div>;
 }
@@ -40,6 +48,7 @@ function Map({city, offers}) {
 Map.propTypes = {
   city: cityProp,
   offers: PropTypes.arrayOf(offerProps),
+  activeOffer: PropTypes.oneOfType([offerProps, PropTypes.object]),
 };
 
 export default Map;

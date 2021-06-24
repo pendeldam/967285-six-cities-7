@@ -7,6 +7,7 @@ import {SortTypes} from '../const';
 const initialState = {
   city: DEFAULT_CITY,
   sortType: SortTypes.POPULAR,
+  activeOffer: null,
   offers,
   reviews,
 };
@@ -17,6 +18,8 @@ export const reducer = (state = initialState, action) => {
       return {...state, city: action.payload};
     case ActionType.SET_SORT_TYPE:
       return {...state, sortType: action.payload};
+    case ActionType.SET_ACTIVE_OFFER:
+      return {...state, activeOffer: action.payload};
     default:
       return state;
   }
