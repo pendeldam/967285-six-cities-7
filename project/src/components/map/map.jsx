@@ -10,6 +10,7 @@ import {URL_MARKER_DEFAULT, URL_MARKER_ACTIVE} from '../../const';
 function Map({city, offers, activeOffer}) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
+  const prevActiveOffer = useRef();
 
   const defaultCustomIcon = leaflet.icon({
     iconUrl: URL_MARKER_DEFAULT,
@@ -25,10 +26,11 @@ function Map({city, offers, activeOffer}) {
 
   useEffect(() => {
     if (map) {
-      const markers = [...map.getPane('markerPane').children];
+      prevActiveOffer.current = activeOffer;
 
-      if (!activeOffer && markers.length) {
-        markers.forEach((marker) => marker.remove());
+      if (prevActiveOffer !== activeOffer) {
+        [...map.getPane('markerPane').children]
+          .forEach((marker) => marker.remove());
       }
 
       map.flyTo([city.location.latitude, city.location.longtitude]);
