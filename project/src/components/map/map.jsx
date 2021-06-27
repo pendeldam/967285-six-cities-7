@@ -25,6 +25,12 @@ function Map({city, offers, activeOffer}) {
 
   useEffect(() => {
     if (map) {
+      const markers = [...map.getPane('markerPane').children];
+
+      if (!activeOffer && markers.length) {
+        markers.forEach((marker) => marker.remove());
+      }
+
       map.flyTo([city.location.latitude, city.location.longtitude]);
 
       offers.forEach((offer) => {
