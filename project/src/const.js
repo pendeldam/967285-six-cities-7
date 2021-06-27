@@ -66,6 +66,13 @@ export const Rating = {
   5: '100%',
 };
 
+export const SortTypes = {
+  POPULAR: 'Popular',
+  PRICE_LOW_TO_HIGH: 'Price: low to high',
+  PRICE_HIGH_TO_LOW: 'Price: high to low',
+  TOP_RATED: 'Top rated firs',
+};
+
 const URL_MARKER_DEFAULT = '../img/pin.svg';
 const URL_MARKER_ACTIVE = '../img/pin-active.svg';
 

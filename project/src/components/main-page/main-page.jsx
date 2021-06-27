@@ -9,7 +9,7 @@ import cityProp from '../cities-container/city.prop';
 import offerProps from '../offer-card/offer-card.prop';
 import {getCityOffers} from '../../store/selectors';
 
-function MainPage({city, offers, changeCity}) {
+function MainPage({city, offers, changeCity, activeOffer, setActiveOffer}) {
   return (
     <div
       className={offers
@@ -25,7 +25,12 @@ function MainPage({city, offers, changeCity}) {
             changeCity={changeCity}
           />
         </div>
-        <CitiesContainer city={city} offers={offers}/>
+        <CitiesContainer
+          city={city}
+          offers={offers}
+          activeOffer={activeOffer}
+          setActiveOffer={setActiveOffer}
+        />
       </main>
     </div>
   );
@@ -35,16 +40,22 @@ MainPage.propTypes = {
   city: cityProp,
   changeCity: PropTypes.func.isRequired,
   offers: PropTypes.arrayOf(offerProps).isRequired,
+  activeOffer: PropTypes.oneOfType([offerProps, PropTypes.object]),
+  setActiveOffer: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   city: state.city,
   offers: getCityOffers(state),
+  activeOffer: state.activeOffer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeCity(city) {
     dispatch(ActionCreator.changeCity(city));
+  },
+  setActiveOffer(offer) {
+    dispatch(ActionCreator.setActiveOffer(offer));
   },
 });
 
