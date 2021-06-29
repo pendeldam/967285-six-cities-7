@@ -33,14 +33,14 @@ function Map({city, offers, activeOffer}) {
           .forEach((marker) => marker.remove());
       }
 
-      map.flyTo([city.location.latitude, city.location.longtitude]);
+      map.flyTo([city.location.latitude, city.location.longitude]);
 
       offers.forEach((offer) => {
-        const {latitude, longtitude} = offer.location;
+        const {latitude, longitude} = offer.location;
 
         leaflet.marker({
           lat: latitude,
-          lng: longtitude,
+          lng: longitude,
         }, {
           icon: (activeOffer && offer.id === activeOffer.id)
             ? activeCustomIcon
