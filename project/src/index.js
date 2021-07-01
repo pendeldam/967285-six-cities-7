@@ -7,8 +7,8 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import {createAPI} from './services/api';
 import {ActionCreator} from './store/action';
 import {checkAuth, fetchOffersList} from './store/api-actions';
+import {reducer} from './store/reducer'
 import App from './components/app/app';
-import {reducer} from './store/reducer';
 import {AuthorizationStatus} from './const';
 
 const api = createAPI(

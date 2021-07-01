@@ -21,16 +21,16 @@ function App({authorizationStatus, isDataLoaded}) {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path={AppRoute.ROOT} exact>
+        <Route exact path={AppRoute.ROOT}>
           <MainPage/>
         </Route>
-        <Route path={AppRoute.FAVORITES} exact>
+        <Route exact path={AppRoute.FAVORITES}>
           <FavoritesPage/>
         </Route>
         <Route path={`${AppRoute.OFFER}/:id`}>
           {/* <OfferPage/> */}
         </Route>
-        <Route path={AppRoute.LOGIN} exact>
+        <Route exact path={AppRoute.LOGIN}>
           <LoginPage/>
         </Route>
         <Route>
