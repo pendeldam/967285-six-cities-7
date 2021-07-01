@@ -14,8 +14,8 @@ export const isCheckedAuth = (authStatus) => authStatus === AuthorizationStatus.
 
 export const isWrongPassword = (value) => [...value].every((it) => it === ' ');
 
-export const adaptToClient = (offers) => {
-  return offers.map((offer) => {
+export const adaptToClient = (offers) => (
+  offers.map((offer) => {
     const result = Object.assign(
       {}, offer,
       {
@@ -28,7 +28,7 @@ export const adaptToClient = (offers) => {
           name: offer.host.name,
           avatarUrl: offer.host.avatar_url,
           isPro: offer.host.is_pro,
-        }
+        },
       },
     );
 
@@ -40,5 +40,5 @@ export const adaptToClient = (offers) => {
     delete result.host.is_pro;
 
     return result;
-  });
-};
+  })
+);
