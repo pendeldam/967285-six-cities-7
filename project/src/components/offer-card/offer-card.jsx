@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import React from 'react';
 import {Link} from 'react-router-dom';
 import offerProps from '../offer-card/offer-card.prop';
@@ -9,7 +8,7 @@ function OfferCard({offer, styles}) {
   const {id, price, type, rating, title} = offer;
 
   const bookmarkBtnStyle = `place-card__bookmark-button
-    ${offer.is_favorite
+    ${offer.isFavorite
     ? 'place-card__bookmark-button--active button'
     : 'button'}`;
 
