@@ -2,7 +2,7 @@ import {ActionType} from './action';
 import {DEFAULT_CITY} from '../const';
 import {reviews} from '../mocks/reviews';
 import {SortTypes, AuthorizationStatus} from '../const';
-import {adaptToClient} from '../utils';
+import {adapt2Client} from '../utils';
 
 const initialState = {
   city: DEFAULT_CITY,
@@ -12,6 +12,11 @@ const initialState = {
   activeOffer: null,
   offers: [],
   reviews,
+  email: '',
+  name: '',
+  id: null,
+  avatarUrl: '',
+  isPro: false,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -34,13 +39,32 @@ export const reducer = (state = initialState, action) => {
     case ActionType.LOAD_OFFERS:
       return {
         ...state,
-        offers: adaptToClient(action.payload),
+        offers: action.payload.map(adapt2Client),
         isDataLoaded: true,
       };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {
         ...state,
         authorizationStatus: action.payload,
+      };
+    case ActionType.SET_USER:
+      return {
+        ...state,
+        email: action.payload.email,
+        name: action.payload.name,
+        id: action.payload.id,
+        avatarUrl: action.payload.avatar_url,
+        isPro: action.payload.is_pro,
+      };
+    case ActionType.LOGOUT:
+      return {
+        ...state,
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
+        email: '',
+        name: '',
+        id: null,
+        avatarUrl: '',
+        isPro: false,
       };
     default:
       return state;
