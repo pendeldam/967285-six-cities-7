@@ -30,10 +30,8 @@ const setCamelCase = (str) => {
   }).join('');
 };
 
-export const adapt2Client = (obj) => {
-  const result = {};
-
-  return Object.entries(obj).reduce((result, [key, value]) => {
+export const adapt2Client = (obj) => (
+  Object.entries(obj).reduce((result, [key, value]) => {
     if (typeof value === 'object') {
       return {...result, [key]: adapt2Client(value)};
     }
@@ -44,5 +42,5 @@ export const adapt2Client = (obj) => {
     }
 
     return {...result, [key]: value};
-  }, result);
-};
+  }, {})
+);
