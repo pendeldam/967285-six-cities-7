@@ -32,7 +32,7 @@ const setCamelCase = (str) => {
 
 export const adapt2Client = (obj) => (
   Object.entries(obj).reduce((result, [key, value]) => {
-    if (typeof value === 'object') {
+    if (typeof value === 'object' && !Array.isArray(value)) {
       return {...result, [key]: adapt2Client(value)};
     }
 

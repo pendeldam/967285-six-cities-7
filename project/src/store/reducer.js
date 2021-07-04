@@ -50,11 +50,7 @@ export const reducer = (state = initialState, action) => {
     case ActionType.SET_USER:
       return {
         ...state,
-        email: action.payload.email,
-        name: action.payload.name,
-        id: action.payload.id,
-        avatarUrl: action.payload.avatar_url,
-        isPro: action.payload.is_pro,
+        ...adapt2Client(action.payload),
       };
     case ActionType.LOGOUT:
       return {
