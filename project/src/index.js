@@ -6,7 +6,7 @@ import {Provider} from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {createAPI} from './services/api';
 import {ActionCreator} from './store/action';
-import {checkAuth, fetchOffersList} from './store/api-actions';
+import {checkAuth} from './store/api-actions';
 import {reducer} from './store/reducer';
 import {redirect} from './store/middlewares/redirect';
 import App from './components/app/app';
@@ -25,7 +25,6 @@ const store = createStore(
 );
 
 store.dispatch(checkAuth());
-store.dispatch(fetchOffersList());
 
 ReactDOM.render(
   <React.StrictMode>

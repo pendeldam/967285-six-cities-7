@@ -6,10 +6,11 @@ import {login} from '../../store/api-actions';
 import Header from '../header/header';
 import ErrorPopup from '../error-popup/error-popup';
 import cityProp from '../cities-container/city.prop';
+import offerProps from '../offer-card/offer-card.prop';
 import {AppRoute} from '../../const';
 import {isWrongPassword} from '../../utils';
 
-function LoginPage({city, onSubmit}) {
+function LoginPage({city, activeOffer, onSubmit}) {
   const loginRef = useRef();
   const passRef = useRef();
   const [error, setError] = useState(false);
@@ -25,6 +26,7 @@ function LoginPage({city, onSubmit}) {
     onSubmit({
       login: loginRef.current.value,
       password: passRef.current.value,
+      activeOffer,
     });
   };
 
@@ -82,11 +84,13 @@ function LoginPage({city, onSubmit}) {
 
 LoginPage.propTypes = {
   city: cityProp,
+  activeOffer: PropTypes.oneOfType([offerProps, PropTypes.object]),
   onSubmit: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({city}) => ({
+const mapStateToProps = ({city, activeOffer}) => ({
   city,
+  activeOffer,
 });
 
 const mapDispatchToProps = (dispatch) => ({

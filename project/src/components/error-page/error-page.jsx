@@ -10,7 +10,7 @@ function ErrorPage() {
       <main className="page__main">
         <div className="container">
           <h1>404. Page not found</h1>
-          <Link to={AppRoute.ROOT}>Вернуться на главную страницу</Link>
+          <Link to={AppRoute.ROOT}>Back to Main page</Link>
           <img src="img/page-not-found.jpg" alt="404. Page not found"/>
         </div>
       </main>
