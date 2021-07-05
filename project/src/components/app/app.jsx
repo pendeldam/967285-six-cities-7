@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {Router as BrowserRouter, Switch, Route} from 'react-router-dom';
+import browserHistory from '../../browser-history';
 import MainPage from '../main-page/main-page';
 import LoginPage from '../login-page/login-page';
 // import OfferPage from '../offer-page/offer-page';
 import FavoritesPage from '../favorites-page/favorites-page';
 import ErrorPage from '../error-page/error-page';
 import LoadingScreen from '../loading-screen/loading-screen';
+import PrivateRoute from '../private-route/private-route';
 import {AppRoute} from '../../const';
 import {isCheckedAuth} from '../../utils';
 
@@ -19,14 +21,14 @@ function App({authorizationStatus, isDataLoaded}) {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
           <MainPage/>
         </Route>
-        <Route exact path={AppRoute.FAVORITES}>
-          <FavoritesPage/>
-        </Route>
+        <PrivateRoute exact path={AppRoute.FAVORITES}
+          render={() => <FavoritesPage/>}
+        />
         <Route path={`${AppRoute.OFFER}/:id`}>
           {/* <OfferPage/> */}
         </Route>

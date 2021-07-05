@@ -59,4 +59,20 @@
   }
 }
 
+.form__input-wrapper {
+  position: relative;
+}
+
+.popup {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  line-height: 30px;
+  text-align: center;
+}
+
+.popup__error {
+  background-color: pink;
+}
+
 /*# sourceMappingURL=main.css.map */

@@ -14,31 +14,33 @@ export const isCheckedAuth = (authStatus) => authStatus === AuthorizationStatus.
 
 export const isWrongPassword = (value) => [...value].every((it) => it === ' ');
 
-export const adaptToClient = (offers) => (
-  offers.map((offer) => {
-    const result = Object.assign(
-      {}, offer,
-      {
-        isPremium: offer.is_premium,
-        isFavorite: offer.is_favorite,
-        previewImage: offer.preview_image,
-        maxAdults: offer.max_adults,
-        host: {
-          id: offer.host.id,
-          name: offer.host.name,
-          avatarUrl: offer.host.avatar_url,
-          isPro: offer.host.is_pro,
-        },
-      },
-    );
+const setCapitalLetter = (str) => (
+  str.replace(str.charAt(0), str.charAt(0).toUpperCase())
+);
 
-    delete result.is_premium;
-    delete result.is_favorite;
-    delete result.preview_image;
-    delete result.max_adults;
-    delete result.host.avatar_url;
-    delete result.host.is_pro;
+const setCamelCase = (str) => {
+  const parts = str.split('_');
 
-    return result;
-  })
+  return parts.map((part, index) => {
+    if (index === 0) {
+      return part;
+    }
+
+    return setCapitalLetter(part);
+  }).join('');
+};
+
+export const adapt2Client = (obj) => (
+  Object.entries(obj).reduce((result, [key, value]) => {
+    if (typeof value === 'object' && !Array.isArray(value)) {
+      return {...result, [key]: adapt2Client(value)};
+    }
+
+    if (key.includes('_')) {
+      const camelKey = setCamelCase(key);
+      return {...result, [camelKey]: value};
+    }
+
+    return {...result, [key]: value};
+  }, {})
 );
