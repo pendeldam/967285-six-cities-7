@@ -16,7 +16,7 @@ export const AppRoute = {
   ROOT: '/',
   LOGIN: '/login',
   FAVORITES: '/favorites',
-  OFFER: '/hotels',
+  OFFER: '/offer',
 };
 
 export const CONNECTION_STATUS = {
