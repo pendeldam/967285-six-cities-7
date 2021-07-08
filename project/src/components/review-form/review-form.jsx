@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 import {postComment} from '../../store/api-actions';
+import ErrorPopup from '../error-popup/error-popup';
 import {CONNECTION_STATUS, RatingWords} from '../../const';
 
 function ReviewFrom({id, comment, rating, sendComment, setComment, setRating, isCommentLoaded}) {
@@ -48,6 +49,11 @@ function ReviewFrom({id, comment, rating, sendComment, setComment, setRating, is
         value={comment}
       />
       <div className="reviews__button-wrapper">
+        {isCommentLoaded === CONNECTION_STATUS.ERROR &&
+        <ErrorPopup
+          style={{bottom: '-40px'}}
+          message={'Connection error. Please, try later...'}
+        />}
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>

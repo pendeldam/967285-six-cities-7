@@ -11,7 +11,7 @@ import NearestOfferCard from '../offer-card/nearest-offer-card';
 import LoadingScreen from '../loading-screen/loading-screen';
 import ErrorPage from '../error-page/error-page';
 import offerProps from '../offer-card/offer-card.prop';
-import {CONNECTION_STATUS, RatingPercent} from '../../const';
+import {CONNECTION_STATUS, RatingPercent, OfferTypes} from '../../const';
 
 function OfferPage({isDataLoaded, offer, nearbyOffers, authorizationStatus, loadOffer}) {
   const location = useLocation();
@@ -19,12 +19,12 @@ function OfferPage({isDataLoaded, offer, nearbyOffers, authorizationStatus, load
 
   useEffect(() => loadOffer(id), [location]);
 
-  if (!offer || isDataLoaded === CONNECTION_STATUS.WAIT) {
-    return <LoadingScreen/>;
-  }
-
   if (isDataLoaded === CONNECTION_STATUS.ERROR) {
     return <ErrorPage/>;
+  }
+
+  if (!offer || isDataLoaded === CONNECTION_STATUS.WAIT) {
+    return <LoadingScreen/>;
   }
 
   return (
@@ -67,7 +67,7 @@ function OfferPage({isDataLoaded, offer, nearbyOffers, authorizationStatus, load
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {offer.type}
+                  {OfferTypes[offer.type]}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
                   {offer.bedrooms} Bedrooms

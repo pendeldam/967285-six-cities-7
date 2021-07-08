@@ -107,6 +107,13 @@ export const RatingWords = {
   5: 'perfect',
 };
 
+export const OfferTypes = {
+  apartment: 'Apartment',
+  room: 'Private Room',
+  hotel: 'Hotel',
+  house: 'House',
+};
+
 export const SortTypes = {
   POPULAR: 'Popular',
   PRICE_LOW_TO_HIGH: 'Price: low to high',

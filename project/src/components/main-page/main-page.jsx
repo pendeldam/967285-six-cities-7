@@ -20,12 +20,12 @@ function MainPage({isDataLoaded, city, offers, changeCity, loadOffers, activeOff
     }
   }, []);
 
-  if (isDataLoaded === CONNECTION_STATUS.WAIT) {
-    return <LoadingScreen/>;
-  }
-
   if (isDataLoaded === CONNECTION_STATUS.ERROR) {
     return <ErrorPage/>;
+  }
+
+  if (isDataLoaded === CONNECTION_STATUS.WAIT) {
+    return <LoadingScreen/>;
   }
 
   return (

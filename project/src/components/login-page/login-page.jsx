@@ -64,7 +64,11 @@ function LoginPage({city, activeOffer, onSubmit}) {
                   required
                   ref={passRef}
                 />
-                {error && <ErrorPopup message={'Passwords with only spaces not allowed'}/>}
+                {error &&
+                  <ErrorPopup
+                    style={{bottom: '-80px'}}
+                    message={'Passwords with only spaces not allowed'}
+                  />}
               </div>
               <button className="login__submit form__submit button" type="submit">Sign in</button>
             </form>
