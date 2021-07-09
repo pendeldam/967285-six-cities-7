@@ -1,15 +1,33 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
+import {fetchOffersList} from '../../store/api-actions';
 import Header from '../header/header';
 import CitiesList from '../cities-list/cities-list';
 import CitiesContainer from '../cities-container/cities-container';
+import LoadingScreen from '../loading-screen/loading-screen';
+import ErrorPage from '../error-page/error-page';
 import cityProp from '../cities-container/city.prop';
 import offerProps from '../offer-card/offer-card.prop';
 import {getCityOffers} from '../../store/selectors';
+import {CONNECTION_STATUS} from '../../const';
 
-function MainPage({city, offers, changeCity, activeOffer, setActiveOffer}) {
+function MainPage({isDataLoaded, city, offers, changeCity, loadOffers, activeOffer, setActiveOffer}) {
+  useEffect(() => {
+    if (!offers.length) {
+      loadOffers();
+    }
+  }, []);
+
+  if (isDataLoaded === CONNECTION_STATUS.ERROR) {
+    return <ErrorPage/>;
+  }
+
+  if (isDataLoaded === CONNECTION_STATUS.WAIT) {
+    return <LoadingScreen/>;
+  }
+
   return (
     <div
       className={offers
@@ -42,17 +60,23 @@ MainPage.propTypes = {
   offers: PropTypes.arrayOf(offerProps).isRequired,
   activeOffer: PropTypes.oneOfType([offerProps, PropTypes.object]),
   setActiveOffer: PropTypes.func.isRequired,
+  loadOffers: PropTypes.func.isRequired,
+  isDataLoaded: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   city: state.city,
   offers: getCityOffers(state),
   activeOffer: state.activeOffer,
+  isDataLoaded: state.isDataLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeCity(city) {
     dispatch(ActionCreator.changeCity(city));
+  },
+  loadOffers() {
+    dispatch(fetchOffersList());
   },
   setActiveOffer(offer) {
     dispatch(ActionCreator.setActiveOffer(offer));

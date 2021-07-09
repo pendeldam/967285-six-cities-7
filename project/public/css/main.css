@@ -59,13 +59,13 @@
   }
 }
 
-.form__input-wrapper {
+.form__input-wrapper,
+.reviews__button-wrapper {
   position: relative;
 }
 
 .popup {
   position: absolute;
-  bottom: 0;
   width: 100%;
   line-height: 30px;
   text-align: center;

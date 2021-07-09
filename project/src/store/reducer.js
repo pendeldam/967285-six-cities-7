@@ -1,17 +1,22 @@
 import {ActionType} from './action';
 import {DEFAULT_CITY} from '../const';
-import {reviews} from '../mocks/reviews';
-import {SortTypes, AuthorizationStatus} from '../const';
+import {SortTypes, AuthorizationStatus, CONNECTION_STATUS} from '../const';
 import {adapt2Client} from '../utils';
 
 const initialState = {
   city: DEFAULT_CITY,
   sortType: SortTypes.POPULAR,
   authorizationStatus: AuthorizationStatus.UNKNOWN,
-  isDataLoaded: false,
+  isDataLoaded: CONNECTION_STATUS.WAIT,
+  isCommentLoaded: CONNECTION_STATUS.SUCCESS,
   activeOffer: null,
   offers: [],
-  reviews,
+  offer: null,
+  nearbyOffers: [],
+  favorites: [],
+  reviews: [],
+  comment: '',
+  rating: 0,
   email: '',
   name: '',
   id: null,
@@ -25,6 +30,11 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         city: action.payload,
+      };
+    case ActionType.CONNECTION_STATUS:
+      return {
+        ...state,
+        [action.payload.type]: action.payload.status,
       };
     case ActionType.SET_SORT_TYPE:
       return {
@@ -40,7 +50,32 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         offers: action.payload.map(adapt2Client),
-        isDataLoaded: true,
+      };
+    case ActionType.LOAD_OFFER:
+      return {
+        ...state,
+        offer: adapt2Client(action.payload),
+        activeOffer: adapt2Client(action.payload),
+      };
+    case ActionType.LOAD_NEARBY_OFFERS:
+      return {
+        ...state,
+        nearbyOffers: action.payload.map(adapt2Client),
+      };
+    case ActionType.LOAD_COMMENTS:
+      return {
+        ...state,
+        reviews: action.payload.map(adapt2Client),
+      };
+    case ActionType.SET_COMMENT:
+      return {
+        ...state,
+        comment: action.payload,
+      };
+    case ActionType.SET_RATING:
+      return {
+        ...state,
+        rating: action.payload,
       };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {

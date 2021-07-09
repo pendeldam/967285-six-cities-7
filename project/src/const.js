@@ -4,11 +4,38 @@ export const AuthorizationStatus = {
   UNKNOWN: 'UNKNOWN',
 };
 
+export const APIRoute = {
+  LOGIN: '/login',
+  LOGOUT: '/logout',
+  HOTELS: '/hotels/',
+  FAVORITES: '/favorite/',
+  COMMENTS: '/comments/',
+};
+
 export const AppRoute = {
   ROOT: '/',
   LOGIN: '/login',
   FAVORITES: '/favorites',
   OFFER: '/offer',
+};
+
+export const CONNECTION_STATUS = {
+  WAIT: 'WAIT',
+  SUCCESS: 'SUCCESS',
+  ERROR: 'ERROR',
+};
+
+export const REQUEST_SOURCE = {
+  PAGE: 'isDataLoaded',
+  COMMENT: 'isCommentLoaded',
+  FAVORITE: 'isFavoriteLoaded',
+};
+
+export const BACKEND_URL = 'https://7.react.pages.academy/six-cities';
+export const REQUEST_TIMEOUT = 5000;
+
+export const HttpCode = {
+  UNAUTHORIZED: 401,
 };
 
 export const CITIES = [
@@ -64,7 +91,7 @@ export const CITIES = [
 
 export const DEFAULT_CITY = CITIES[0];
 
-export const Rating = {
+export const RatingPercent = {
   1: '20%',
   2: '40%',
   3: '60%',
@@ -72,19 +99,26 @@ export const Rating = {
   5: '100%',
 };
 
+export const RatingWords = {
+  1: 'terribly',
+  2: 'badly',
+  3: 'not bad',
+  4: 'good',
+  5: 'perfect',
+};
+
+export const OfferTypes = {
+  apartment: 'Apartment',
+  room: 'Private Room',
+  hotel: 'Hotel',
+  house: 'House',
+};
+
 export const SortTypes = {
   POPULAR: 'Popular',
   PRICE_LOW_TO_HIGH: 'Price: low to high',
   PRICE_HIGH_TO_LOW: 'Price: high to low',
   TOP_RATED: 'Top rated firs',
-};
-
-export const APIRoute = {
-  LOGIN: '/login',
-  LOGOUT: '/logout',
-  HOTELS: '/hotels/',
-  FAVORITES: '/favorite/',
-  COMMENTS: '/comments/',
 };
 
 const URL_MARKER_DEFAULT = '../img/pin.svg';
