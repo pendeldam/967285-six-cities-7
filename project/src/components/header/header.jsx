@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {logout} from '../../store/api-actions';
+import {signout} from '../../store/api-actions';
+import {getUser, getAvatarUrl} from '../../store/app-user/selectors';
 import {AppRoute} from '../../const';
 
 function Header({user, avatarUrl, onExit}) {
@@ -57,14 +58,14 @@ Header.propTypes = {
   onExit: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({email, avatarUrl}) => ({
-  user: email,
-  avatarUrl,
+const mapStateToProps = (state) => ({
+  user: getUser(state),
+  avatarUrl: getAvatarUrl(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onExit() {
-    dispatch(logout());
+    dispatch(signout());
   },
 });
 

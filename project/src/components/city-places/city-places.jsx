@@ -1,34 +1,28 @@
-/* eslint-disable no-unused-vars */
-import React, {useState} from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import React from 'react';
+import {useSelector} from 'react-redux';
 import Sorting from '../sorting/sorting';
 import OffersList from '../offer-list/offer-list';
 import PlaceOfferCard from '../offer-card/place-offer-card';
+import {getSortedOffers} from '../../store/app-data/selectors';
 import cityProp from '../cities-container/city.prop';
-import offerCardProp from '../offer-card/offer-card.prop';
-import {sortOffers} from '../../sort';
 
-function CityPlaces({city, offers, sortType, setSortType, setActiveOffer}) {
+function CityPlaces({city}) {
+  const offers = useSelector(getSortedOffers);
+
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">{offers.length} places to stay in {city.name}</b>
-      <Sorting
-        sortType={sortType}
-        setSortType={setSortType}
-      />
+      <Sorting/>
 
       <OffersList
         styles={{main: 'cities__places-list places__list tabs__content'}}
         render={() => (
-          sortOffers(sortType, offers).map((offer) => (
+          offers.map((offer) => (
             <PlaceOfferCard
               styles={{article: 'cities__place-card'}}
               key={offer.id}
               offer={offer}
-              setActiveOffer={setActiveOffer}
             />
           ))
         )}
@@ -39,21 +33,6 @@ function CityPlaces({city, offers, sortType, setSortType, setActiveOffer}) {
 
 CityPlaces.propTypes = {
   city: cityProp,
-  offers: PropTypes.arrayOf(offerCardProp).isRequired,
-  sortType: PropTypes.string.isRequired,
-  setSortType: PropTypes.func.isRequired,
-  setActiveOffer: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({sortType}) => ({
-  sortType,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  setSortType(type) {
-    dispatch(ActionCreator.setSortType(type));
-  },
-});
-
-export {CityPlaces};
-export default connect(mapStateToProps, mapDispatchToProps)(CityPlaces);
+export default CityPlaces;

@@ -1,9 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import {useDispatch} from 'react-redux';
+import {setCity} from '../../store/action';
 import cityProp from '../cities-container/city.prop';
 import {CITIES} from '../../const';
 
-function CitiesList({city, changeCity}) {
+function CitiesList({city}) {
+  const dispatch = useDispatch();
+
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
@@ -14,7 +17,7 @@ function CitiesList({city, changeCity}) {
           >
             <a
               href="#"
-              onClick={() => changeCity(it)}
+              onClick={() => dispatch(setCity(it))}
               className={it.name === city.name
                 ? 'locations__item-link tabs__item tabs__item--active'
                 : 'locations__item-link tabs__item'}
@@ -30,7 +33,6 @@ function CitiesList({city, changeCity}) {
 
 CitiesList.propTypes = {
   city: cityProp,
-  changeCity: PropTypes.func.isRequired,
 };
 
 export default CitiesList;

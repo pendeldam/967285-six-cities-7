@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
+import {getSortedReviews} from '../../store/app-data/selectors';
+import {getAuthorizationStatus} from '../../store/app-user/selectors';
 import ReviewItem from '../review-item/review-item';
 import ReviewForm from '../review-form/review-form';
-import reviewProps from '../review-item/review-item.prop';
-import {getSortedReviews} from '../../store/selectors';
 import {AuthorizationStatus} from '../../const';
 
-function ReviewList({reviews, authorizationStatus, id}) {
+function ReviewList({id}) {
+  const reviews = useSelector(getSortedReviews);
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
@@ -26,15 +29,8 @@ function ReviewList({reviews, authorizationStatus, id}) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  reviews: getSortedReviews(state),
-});
-
 ReviewList.propTypes = {
   id: PropTypes.string.isRequired,
-  reviews: PropTypes.arrayOf(reviewProps),
-  authorizationStatus: PropTypes.string.isRequired,
 };
 
-export {ReviewList};
-export default connect(mapStateToProps)(ReviewList);
+export default ReviewList;

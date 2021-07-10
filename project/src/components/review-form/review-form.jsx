@@ -1,12 +1,19 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import {useSelector, useDispatch} from 'react-redux';
+import {getComment, getRating, getIsCommentLoaded} from '../../store/app-state/selectors';
+import {setComment, setRating} from '../../store/action';
 import {postComment} from '../../store/api-actions';
 import ErrorPopup from '../error-popup/error-popup';
 import {CONNECTION_STATUS, RatingWords} from '../../const';
 
-function ReviewFrom({id, comment, rating, sendComment, setComment, setRating, isCommentLoaded}) {
+function ReviewFrom({id}) {
+  const dispatch = useDispatch();
+
+  const comment = useSelector(getComment);
+  const rating = useSelector(getRating);
+  const isCommentLoaded = useSelector(getIsCommentLoaded);
+
   return (
     <form
       className="reviews__form form"
@@ -14,7 +21,9 @@ function ReviewFrom({id, comment, rating, sendComment, setComment, setRating, is
       method="post"
       onSubmit={(evt) => {
         evt.preventDefault();
-        sendComment(id, {comment, rating});
+        dispatch(
+          postComment(id, {comment, rating})
+        );
       }}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
@@ -27,7 +36,7 @@ function ReviewFrom({id, comment, rating, sendComment, setComment, setRating, is
               value={key}
               id={`${key}-stars`}
               type="radio"
-              onChange={(evt) => setRating(+evt.target.value)}
+              onChange={(evt) => dispatch(setRating(+evt.target.value))}
               disabled={isCommentLoaded === CONNECTION_STATUS.WAIT}
               checked={rating === +key}
             />
@@ -44,7 +53,7 @@ function ReviewFrom({id, comment, rating, sendComment, setComment, setRating, is
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={(evt) => setComment(evt.target.value)}
+        onChange={(evt) => dispatch(setComment(evt.target.value))}
         disabled={isCommentLoaded === CONNECTION_STATUS.WAIT}
         value={comment}
       />
@@ -69,34 +78,8 @@ function ReviewFrom({id, comment, rating, sendComment, setComment, setRating, is
   );
 }
 
-const mapStateToProps = ({comment, rating, isCommentLoaded}) => ({
-  comment,
-  rating,
-  isCommentLoaded,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  setComment(comment) {
-    dispatch(ActionCreator.setComment(comment));
-  },
-  setRating(rating) {
-    dispatch(ActionCreator.setRating(rating));
-  },
-  sendComment(id, comment) {
-    dispatch(postComment(id, comment));
-  },
-});
-
-
 ReviewFrom.propTypes = {
   id: PropTypes.string.isRequired,
-  comment: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
-  setComment: PropTypes.func.isRequired,
-  setRating: PropTypes.func.isRequired,
-  sendComment: PropTypes.func.isRequired,
-  isCommentLoaded: PropTypes.string.isRequired,
 };
 
-export {ReviewFrom};
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewFrom);
+export default ReviewFrom;

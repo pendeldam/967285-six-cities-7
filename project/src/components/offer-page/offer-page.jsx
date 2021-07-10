@@ -1,7 +1,9 @@
 import React, {useEffect} from 'react';
 import {useLocation, useParams} from 'react-router';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {getOffer, getNearbyOffers} from '../../store/app-data/selectors';
+import {getIsDataLoaded} from '../../store/app-state/selectors';
+import {getAuthorizationStatus} from '../../store/app-user/selectors';
 import {fetchOffer} from '../../store/api-actions';
 import Header from '../header/header';
 import ReviewList from '../review-list/review-list';
@@ -10,14 +12,19 @@ import OfferList from '../offer-list/offer-list';
 import NearestOfferCard from '../offer-card/nearest-offer-card';
 import LoadingScreen from '../loading-screen/loading-screen';
 import ErrorPage from '../error-page/error-page';
-import offerProps from '../offer-card/offer-card.prop';
 import {CONNECTION_STATUS, RatingPercent, OfferTypes} from '../../const';
 
-function OfferPage({isDataLoaded, offer, nearbyOffers, authorizationStatus, loadOffer}) {
-  const location = useLocation();
+function OfferPage() {
+  const dispatch = useDispatch();
   const id = useParams().id;
+  const location = useLocation();
 
-  useEffect(() => loadOffer(id), [location]);
+  const offer = useSelector(getOffer);
+  const nearbyOffers = useSelector(getNearbyOffers);
+  const isDataLoaded = useSelector(getIsDataLoaded);
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+
+  useEffect(() => dispatch(fetchOffer(id)), [location]);
 
   if (isDataLoaded === CONNECTION_STATUS.ERROR) {
     return <ErrorPage/>;
@@ -116,7 +123,6 @@ function OfferPage({isDataLoaded, offer, nearbyOffers, authorizationStatus, load
           <section className="property__map map">
             <Map
               city={offer.city}
-              activeOffer={offer}
               offers={[...nearbyOffers, offer]}
             />
           </section>
@@ -144,26 +150,4 @@ function OfferPage({isDataLoaded, offer, nearbyOffers, authorizationStatus, load
   );
 }
 
-const mapStateToProps = (state) => ({
-  offer: state.offer,
-  nearbyOffers: state.nearbyOffers,
-  isDataLoaded: state.isDataLoaded,
-  authorizationStatus: state.authorizationStatus,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  loadOffer(id) {
-    dispatch(fetchOffer(id));
-  },
-});
-
-OfferPage.propTypes = {
-  offer: PropTypes.oneOfType([offerProps, PropTypes.object]),
-  nearbyOffers: PropTypes.arrayOf(offerProps),
-  loadOffer: PropTypes.func.isRequired,
-  isDataLoaded: PropTypes.string.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
-};
-
-export {OfferPage};
-export default connect(mapStateToProps, mapDispatchToProps)(OfferPage);
+export default OfferPage;

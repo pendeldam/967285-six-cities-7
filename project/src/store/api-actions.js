@@ -1,71 +1,71 @@
-import {ActionCreator} from './action';
+import {loadOffers, loadOffer, loadNearbyOffers, loadComments, setComment, setRating, setConnectionStatus, setUser, requireAuthorization, redirectToRoute, logout} from './action';
 import {AuthorizationStatus, APIRoute, AppRoute, CONNECTION_STATUS, REQUEST_SOURCE} from '../const';
 
 export const fetchOffersList = () => (dispatch, _getState, api) => {
-  dispatch(ActionCreator.setConnectionStatus({
+  dispatch(setConnectionStatus({
     type: REQUEST_SOURCE.PAGE,
     status: CONNECTION_STATUS.WAIT,
   }));
 
   api.get(APIRoute.HOTELS)
     .then(({data}) => {
-      dispatch(ActionCreator.loadOffers(data));
-      dispatch(ActionCreator.setConnectionStatus({
+      dispatch(loadOffers(data));
+      dispatch(setConnectionStatus({
         type: REQUEST_SOURCE.PAGE,
         status: CONNECTION_STATUS.SUCCESS,
       }));
     })
-    .catch(() => dispatch(ActionCreator.setConnectionStatus({
+    .catch(() => dispatch(setConnectionStatus({
       type: REQUEST_SOURCE.PAGE,
       status: CONNECTION_STATUS.ERROR,
     })));
 };
 
 export const fetchOffer = (id) => (dispatch, _getState, api) => {
-  dispatch(ActionCreator.setConnectionStatus({
+  dispatch(setConnectionStatus({
     type: REQUEST_SOURCE.PAGE,
     status: CONNECTION_STATUS.WAIT,
   }));
 
   api.get(`${APIRoute.HOTELS}${id}`)
     .then(({data: offer}) => {
-      dispatch(ActionCreator.loadOffer(offer));
-      dispatch(ActionCreator.setConnectionStatus({
+      dispatch(loadOffer(offer));
+      dispatch(setConnectionStatus({
         type: REQUEST_SOURCE.PAGE,
         status: CONNECTION_STATUS.SUCCESS,
       }));
       return api.get(`${APIRoute.HOTELS}${id}/nearby`)
         .then(({data: nearby}) => {
-          dispatch(ActionCreator.loadNearbyOffers(nearby));
+          dispatch(loadNearbyOffers(nearby));
           return api.get(`${APIRoute.COMMENTS}${id}`)
             .then(({data: comments}) => {
-              dispatch(ActionCreator.loadComments(comments));
+              dispatch(loadComments(comments));
             });
         });
     })
-    .catch(() => dispatch(ActionCreator.setConnectionStatus({
+    .catch(() => dispatch(setConnectionStatus({
       type: REQUEST_SOURCE.PAGE,
       status: CONNECTION_STATUS.ERROR,
     })));
 };
 
 export const postComment = (id, comment) => (dispatch, _getState, api) => {
-  dispatch(ActionCreator.setConnectionStatus({
+  dispatch(setConnectionStatus({
     type: REQUEST_SOURCE.COMMENT,
     status: CONNECTION_STATUS.WAIT,
   }));
 
   api.post(`${APIRoute.COMMENTS}${id}`, comment)
     .then(({data: comments}) => {
-      dispatch(ActionCreator.loadComments(comments));
-      dispatch(ActionCreator.setConnectionStatus({
+      dispatch(loadComments(comments));
+      dispatch(setConnectionStatus({
         type: REQUEST_SOURCE.COMMENT,
         status: CONNECTION_STATUS.SUCCESS,
       }));
-      dispatch(ActionCreator.setComment(''));
-      dispatch(ActionCreator.setRating(0));
+      dispatch(setComment(''));
+      dispatch(setRating(0));
     })
-    .catch(() => dispatch(ActionCreator.setConnectionStatus({
+    .catch(() => dispatch(setConnectionStatus({
       type: REQUEST_SOURCE.COMMENT,
       status: CONNECTION_STATUS.ERROR,
     })));
@@ -73,7 +73,7 @@ export const postComment = (id, comment) => (dispatch, _getState, api) => {
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
-    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
     .catch(() => {})
 );
 
@@ -81,18 +81,19 @@ export const login = ({login: email, password, activeOffer}) => (dispatch, _getS
   api.post(APIRoute.LOGIN, {email, password})
     .then(({data}) => {
       localStorage.setItem('token', data.token);
-      dispatch(ActionCreator.setUser(data));
-      dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+      dispatch(setUser(data));
+      dispatch(requireAuthorization(AuthorizationStatus.AUTH));
 
       if (activeOffer) {
-        dispatch(ActionCreator.redirectToRoute(`${AppRoute.OFFER}/${activeOffer.id}`));
+        dispatch(redirectToRoute(`${AppRoute.OFFER}/${activeOffer.id}`));
       } else {
-        dispatch(ActionCreator.redirectToRoute(AppRoute.ROOT));
+        dispatch(redirectToRoute(AppRoute.ROOT));
       }
     })
 );
-export const logout = () => (dispatch, _getState, api) => (
+
+export const signout = () => (dispatch, _getState, api) => (
   api.delete(APIRoute.LOGOUT)
     .then(() => localStorage.removeItem('token'))
-    .then(() => dispatch(ActionCreator.logout()))
+    .then(() => dispatch(logout()))
 );
