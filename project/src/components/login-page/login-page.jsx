@@ -16,7 +16,7 @@ function LoginPage() {
   const dispatch = useDispatch();
   const city = useSelector(getCity);
   const activeOffer = useSelector(getActiveOffer);
-  
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
@@ -27,10 +27,10 @@ function LoginPage() {
 
     dispatch(
       login({
-          login: loginRef.current.value,
-          password: passRef.current.value,
-          activeOffer,
-        })
+        login: loginRef.current.value,
+        password: passRef.current.value,
+        activeOffer,
+      }),
     );
   };
 

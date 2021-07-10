@@ -7,7 +7,7 @@ import {AuthorizationStatus, AppRoute} from '../../const';
 
 function PrivateRoute({render, path, exact}) {
   const authorizationStatus = useSelector(getAuthorizationStatus);
-  
+
   return (
     <Route
       path={path}

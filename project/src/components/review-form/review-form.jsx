@@ -22,7 +22,7 @@ function ReviewFrom({id}) {
       onSubmit={(evt) => {
         evt.preventDefault();
         dispatch(
-          postComment(id, {comment, rating})
+          postComment(id, {comment, rating}),
         );
       }}
     >

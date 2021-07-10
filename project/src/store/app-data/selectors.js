@@ -35,7 +35,7 @@ export const getSortedOffers = createSelector(
       case SortTypes.TOP_RATED:
         return offers.slice().sort((a, b) => b.rating - a.rating);
     }
-  }
+  },
 );
 
 export const getFavorites = createSelector(
