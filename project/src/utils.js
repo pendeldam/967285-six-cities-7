@@ -1,5 +1,7 @@
 import {AuthorizationStatus} from './const';
 
+export const getRatingStyle = (value) => `${value / 5 * 100}%`;
+
 export const formatDate = (date) => new Date(date).toLocaleDateString('en-US', {month: 'long', year: 'numeric'});
 
 export const isCheckedAuth = (authStatus) => authStatus === AuthorizationStatus.UNKNOWN;

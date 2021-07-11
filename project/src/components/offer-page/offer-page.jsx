@@ -12,7 +12,8 @@ import OfferList from '../offer-list/offer-list';
 import NearestOfferCard from '../offer-card/nearest-offer-card';
 import LoadingScreen from '../loading-screen/loading-screen';
 import ErrorPage from '../error-page/error-page';
-import {CONNECTION_STATUS, RatingPercent, OfferTypes} from '../../const';
+import {CONNECTION_STATUS, OfferTypes} from '../../const';
+import {getRatingStyle} from '../../utils';
 
 function OfferPage() {
   const dispatch = useDispatch();
@@ -67,7 +68,7 @@ function OfferPage() {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: RatingPercent[offer.rating]}}></span>
+                  <span style={{width: getRatingStyle(offer.rating)}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{offer.rating}</span>
