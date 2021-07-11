@@ -5,12 +5,14 @@ import {DEFAULT_CITY, SortTypes} from '../../const';
 const initialState = {
   city: DEFAULT_CITY,
   sortType: SortTypes.POPULAR,
-  offer: null,
   offers: [],
   activeOffer: null,
-  nearbyOffers: [],
   favorites: [],
-  reviews: [],
+  offer: {
+    main: null,
+    nearbyOffers: [],
+    reviews: [],
+  },
 };
 
 export const appData = (state = initialState, action) => {
@@ -38,19 +40,13 @@ export const appData = (state = initialState, action) => {
     case ActionType.LOAD_OFFER:
       return {
         ...state,
-        offer: adapt2Client(action.payload),
-        activeOffer: adapt2Client(action.payload),
-        city: action.payload.city,
-      };
-    case ActionType.LOAD_NEARBY_OFFERS:
-      return {
-        ...state,
-        nearbyOffers: action.payload.map(adapt2Client),
-      };
-    case ActionType.LOAD_COMMENTS:
-      return {
-        ...state,
-        reviews: action.payload.map(adapt2Client),
+        activeOffer: adapt2Client(action.payload.main),
+        city: action.payload.main.city,
+        offer: {
+          main: adapt2Client(action.payload.main),
+          nearbyOffers: action.payload.nearby.map(adapt2Client),
+          reviews: action.payload.reviews.map(adapt2Client),
+        },
       };
     default:
       return state;
