@@ -1,7 +1,7 @@
 import {createSelector} from 'reselect';
 import {SortTypes} from '../../const';
 
-const getReviews = ({DATA}) => DATA.offer.reviews;
+const getReviews = ({DATA}) => DATA.reviews;
 
 export const getSortType = ({DATA}) => DATA.sortType;
 
@@ -9,11 +9,11 @@ export const getOffers = ({DATA}) => DATA.offers;
 
 export const getCity = ({DATA}) => DATA.city;
 
-export const getOffer = ({DATA}) => DATA.offer.main;
+export const getOffer = ({DATA}) => DATA.offer;
 
 export const getActiveOffer = ({DATA}) => DATA.activeOffer;
 
-export const getNearbyOffers = ({DATA}) => DATA.offer.nearbyOffers;
+export const getNearbyOffers = ({DATA}) => DATA.nearbyOffers;
 
 export const getCityOffers = createSelector(
   [getCity, getOffers],

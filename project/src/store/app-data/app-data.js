@@ -8,11 +8,9 @@ const initialState = {
   offers: [],
   activeOffer: null,
   favorites: [],
-  offer: {
-    main: null,
-    nearbyOffers: [],
-    reviews: [],
-  },
+  offer: null,
+  nearbyOffers: [],
+  reviews: [],
 };
 
 export const appData = (state = initialState, action) => {
@@ -37,16 +35,22 @@ export const appData = (state = initialState, action) => {
         ...state,
         offers: action.payload.map(adapt2Client),
       };
+    case ActionType.LOAD_COMMENTS:
+      return {
+        ...state,
+        reviews: action.payload.map(adapt2Client),
+      };
+    case ActionType.LOAD_NEARBY:
+      return {
+        ...state,
+        nearbyOffers: action.payload.map(adapt2Client),
+      };
     case ActionType.LOAD_OFFER:
       return {
         ...state,
-        activeOffer: adapt2Client(action.payload.main),
-        city: action.payload.main.city,
-        offer: {
-          main: adapt2Client(action.payload.main),
-          nearbyOffers: action.payload.nearby.map(adapt2Client),
-          reviews: action.payload.reviews.map(adapt2Client),
-        },
+        activeOffer: adapt2Client(action.payload),
+        city: action.payload.city,
+        offer: adapt2Client(action.payload),
       };
     default:
       return state;

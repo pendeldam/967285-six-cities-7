@@ -1,6 +1,8 @@
 export const ActionType = {
   CONNECTION_STATUS: 'state/CONNECTION_STATUS',
   LOAD_OFFER: 'data/LOAD_OFFER',
+  LOAD_NEARBY: 'data/LOAD_NEARBY',
+  LOAD_COMMENTS: 'data/LOAD_COMMENTS',
   LOAD_OFFERS: 'data/LOAD_OFFERS',
   LOGOUT: 'user/logout',
   REDIRECT_TO_ROUTE: 'data/REDIRECT_TO_ROUTE',
@@ -21,6 +23,16 @@ export const setCity = (city) => ({
 export const loadOffer = (offer) => ({
   type: ActionType.LOAD_OFFER,
   payload: offer,
+});
+
+export const loadComments = (comments) => ({
+  type: ActionType.LOAD_COMMENTS,
+  payload: comments,
+});
+
+export const loadNearby = (offers) => ({
+  type: ActionType.LOAD_NEARBY,
+  payload: offers,
 });
 
 export const loadOffers = (offers) => ({

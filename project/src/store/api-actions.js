@@ -1,4 +1,4 @@
-import {loadOffers, loadOffer, setComment, setRating, setConnectionStatus, setUser, requireAuthorization, redirectToRoute, logout} from './action';
+import {loadOffers, loadOffer, loadNearby, loadComments, setComment, setRating, setConnectionStatus, setUser, requireAuthorization, redirectToRoute, logout} from './action';
 import {AuthorizationStatus, APIRoute, AppRoute, CONNECTION_STATUS, REQUEST_SOURCE} from '../const';
 
 export const fetchOffersList = () => (dispatch, _getState, api) => {
@@ -28,17 +28,19 @@ export const fetchOffer = (id) => (dispatch, _getState, api) => {
   }));
 
   api.get(`${APIRoute.HOTELS}${id}`)
-    .then(({data: main}) => {
+    .then(({data: offer}) => {
+      dispatch(loadOffer(offer));
+      dispatch(setConnectionStatus({
+        type: REQUEST_SOURCE.PAGE,
+        status: CONNECTION_STATUS.SUCCESS,
+      }));
+
       return api.get(`${APIRoute.HOTELS}${id}/nearby`)
         .then(({data: nearby}) => {
           api.get(`${APIRoute.COMMENTS}${id}`)
-            .then(({data: reviews}) => {
-              console.log({main, nearby, reviews});
-              dispatch(loadOffer({main, nearby, reviews}));
-              dispatch(setConnectionStatus({
-                type: REQUEST_SOURCE.PAGE,
-                status: CONNECTION_STATUS.SUCCESS,
-              }));
+            .then(({data: comments}) => {
+              dispatch(loadNearby(nearby));
+              dispatch(loadComments(comments));
             });
         });
     })
