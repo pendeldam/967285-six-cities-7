@@ -22,6 +22,21 @@ export const getCityOffers = createSelector(
   )),
 );
 
+export const getComment = ({DATA}) => DATA.comment;
+
+export const getFavorites = createSelector(
+  [getCity, getOffers],
+  (city, offers) => offers.filter((offer) => (
+    offer.city.name === city.name && offer.isFavorite === true
+  )),
+);
+
+export const getIsDataLoaded = ({DATA}) => DATA.isDataLoaded;
+
+export const getIsCommentLoaded = ({DATA}) => DATA.isCommentLoaded;
+
+export const getRating = ({DATA}) => DATA.rating;
+
 export const getSortedOffers = createSelector(
   [getSortType, getCityOffers],
   (sortType, offers) => {
@@ -36,13 +51,6 @@ export const getSortedOffers = createSelector(
         return offers.slice().sort((a, b) => b.rating - a.rating);
     }
   },
-);
-
-export const getFavorites = createSelector(
-  [getCity, getOffers],
-  (city, offers) => offers.filter((offer) => (
-    offer.city.name === city.name && offer.isFavorite === true
-  )),
 );
 
 export const getSortedReviews = createSelector(

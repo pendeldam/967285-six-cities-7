@@ -17,30 +17,71 @@ export const ActionType = {
   SET_USER: 'user/SET_USER',
 };
 
-export const loadComments = createAction(ActionType.LOAD_COMMENTS,(comments) => ({payload: comments}));
+export const loadComments = createAction(
+  ActionType.LOAD_COMMENTS,
+  (comments) => ({payload: comments}),
+);
 
-export const loadOffer = createAction(ActionType.LOAD_OFFER, (offer) => ({payload: offer}));
+export const loadOffer = createAction(
+  ActionType.LOAD_OFFER,
+  (offer) => ({payload: offer}),
+);
 
-export const loadOffers = createAction(ActionType.LOAD_OFFERS, (offers) => ({payload: offers}));
+export const loadOffers = createAction(
+  ActionType.LOAD_OFFERS,
+  (offers) => ({payload: offers}),
+);
 
-export const loadNearby = createAction(ActionType.LOAD_NEARBY, (offers) => ({payload: offers}));
+export const loadNearby = createAction(
+  ActionType.LOAD_NEARBY,
+  (offers) => ({payload: offers}),
+);
 
-export const logout = createAction(ActionType.LOGOUT);
+export const logout = createAction(
+  ActionType.LOGOUT,
+);
 
-export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (url) => ({payload: url}));
+export const redirectToRoute = createAction(
+  ActionType.REDIRECT_TO_ROUTE,
+  (url) => ({payload: url}),
+);
 
-export const requireAuthorization = createAction(ActionType.REQUIRED_AUTHORIZATION, (status) => ({payload: status}));
+export const requireAuthorization = createAction(
+  ActionType.REQUIRED_AUTHORIZATION,
+  (status) => ({payload: status}),
+);
 
-export const setConnectionStatus = createAction(ActionType.CONNECTION_STATUS, (status) => ({payload: status}));
+export const setConnectionStatus = createAction(
+  ActionType.CONNECTION_STATUS,
+  (status) => ({payload: status}),
+);
 
-export const setActiveOffer = createAction(ActionType.SET_ACTIVE_OFFER, (offer) => ({payload: offer}));
+export const setActiveOffer = createAction(
+  ActionType.SET_ACTIVE_OFFER,
+  (offer) => ({payload: offer}),
+);
 
-export const setCity = createAction(ActionType.SET_CITY, (city) => ({payload: city}));
+export const setCity = createAction(
+  ActionType.SET_CITY,
+  (city) => ({payload: city}),
+);
 
-export const setComment = createAction(ActionType.SET_COMMENT, (comment) => ({payload: comment}));
+export const setComment = createAction(
+  ActionType.SET_COMMENT,
+  (comment) => ({payload: comment}),
+);
 
-export const setRating = createAction(ActionType.SET_RATING, (rating) => ({payload: rating}));
+export const setRating = createAction(
+  ActionType.SET_RATING,
+  (rating) => ({payload: rating}),
+);
 
-export const setSortType = createAction(ActionType.SET_SORT_TYPE, (type) => ({payload: type}));
+export const setSortType = createAction(
+  ActionType.SET_SORT_TYPE,
+  (type) => ({payload: type}),
+);
 
-export const setUser = createAction(ActionType.SET_USER, (user) => ({payload: user}));
+export const setUser = createAction(
+  ActionType.SET_USER,
+  (user) => ({payload: user}),
+);

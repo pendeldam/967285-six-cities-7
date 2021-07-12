@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {useSelector, useDispatch} from 'react-redux';
-import {getComment, getRating, getIsCommentLoaded} from '../../store/app-state/selectors';
+import {getComment, getRating, getIsCommentLoaded} from '../../store/app-data/selectors';
 import {setComment, setRating} from '../../store/action';
 import {postComment} from '../../store/api-actions';
 import ErrorPopup from '../error-popup/error-popup';

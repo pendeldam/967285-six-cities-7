@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 import React from 'react';
-import {getRatingStyle} from '../../utils';
-import {formatDate} from '../../utils';
+import {formatDate, getRatingStyle} from '../../utils';
 import reviewProps from '../review-item/review-item.prop';
 
 function ReviewItem({review}) {
