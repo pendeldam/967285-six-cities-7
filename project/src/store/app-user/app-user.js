@@ -1,39 +1,33 @@
-import {ActionType} from '../action';
+import {createReducer} from '@reduxjs/toolkit';
+import {logout, setUser, requireAuthorization} from '../action';
 import {AuthorizationStatus} from '../../const';
 import {adapt2Client} from '../../utils';
 
 const initialState = {
+  avatarUrl: '',
   authorizationStatus: AuthorizationStatus.UNKNOWN,
   email: '',
-  name: '',
   id: null,
-  avatarUrl: '',
   isPro: false,
+  name: '',
+  token: null,
 };
 
-export const appUser = (state = initialState, action) => {
-  switch (action.type) {
-    case ActionType.REQUIRED_AUTHORIZATION:
-      return {
-        ...state,
-        authorizationStatus: action.payload,
-      };
-    case ActionType.SET_USER:
-      return {
-        ...state,
-        ...adapt2Client(action.payload),
-      };
-    case ActionType.LOGOUT:
-      return {
-        ...state,
-        authorizationStatus: AuthorizationStatus.NO_AUTH,
-        email: '',
-        name: '',
-        id: null,
-        avatarUrl: '',
-        isPro: false,
-      };
-    default:
-      return state;
-  }
-};
+export const appUser = createReducer(initialState, (builder) => {
+  builder
+    .addCase(logout, (state) => {
+      state.avatarUrl = '';
+      state.authorizationStatus = AuthorizationStatus.NO_AUTH;
+      state.email = '';
+      state.id = null;
+      state.isPro = false;
+      state.name = '';
+      state.token = null;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setUser, (state, action) => (
+      {...state, ...adapt2Client(action.payload)}
+    ));
+});

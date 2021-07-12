@@ -1,4 +1,5 @@
-import {ActionType} from '../action';
+import {createReducer} from '@reduxjs/toolkit';
+import {setConnectionStatus, setComment, setRating} from '../action';
 import {CONNECTION_STATUS} from '../../const';
 
 const initialState = {
@@ -8,24 +9,15 @@ const initialState = {
   rating: 0,
 };
 
-export const appState = (state = initialState, action) => {
-  switch (action.type) {
-    case ActionType.CONNECTION_STATUS:
-      return {
-        ...state,
-        [action.payload.type]: action.payload.status,
-      };
-    case ActionType.SET_COMMENT:
-      return {
-        ...state,
-        comment: action.payload,
-      };
-    case ActionType.SET_RATING:
-      return {
-        ...state,
-        rating: action.payload,
-      };
-    default:
-      return state;
-  }
-};
+export const appState = createReducer(initialState, (builder) => {
+  builder
+    .addCase(setConnectionStatus, (state, action) => {
+      state[action.payload.type] = action.payload.status;
+    })
+    .addCase(setComment, (state, action) => {
+      state.comment = action.payload;
+    })
+    .addCase(setRating, (state, action) => {
+      state.rating = action.payload;
+    });
+});
