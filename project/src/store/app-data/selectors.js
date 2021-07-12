@@ -48,6 +48,7 @@ export const getFavorites = createSelector(
 export const getSortedReviews = createSelector(
   [getReviews],
   (reviews) => reviews
+    .slice()
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 10),
 );
