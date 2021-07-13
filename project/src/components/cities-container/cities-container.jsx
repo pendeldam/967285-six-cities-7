@@ -12,7 +12,7 @@ function CitiesContainer({city}) {
   return (
     <div className="cities">
       <div className="cities__places-container container">
-        {offers ?
+        {offers.length ?
           <Fragment>
             <CityPlaces city={city}/>
             <div className="cities__right-section">

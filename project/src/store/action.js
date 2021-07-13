@@ -1,17 +1,19 @@
 import {createAction} from '@reduxjs/toolkit';
 
 export const ActionType = {
-  CONNECTION_STATUS: 'state/CONNECTION_STATUS',
-  LOAD_OFFER: 'data/LOAD_OFFER',
-  LOAD_NEARBY: 'data/LOAD_NEARBY',
+  CONNECTION_STATUS: 'data/CONNECTION_STATUS',
   LOAD_COMMENTS: 'data/LOAD_COMMENTS',
+  LOAD_FAVORITES: 'LOAD_FAVORITES',
+  LOAD_OFFER: 'data/LOAD_OFFER',
   LOAD_OFFERS: 'data/LOAD_OFFERS',
+  LOAD_NEARBY: 'data/LOAD_NEARBY',
   LOGOUT: 'user/logout',
   REDIRECT_TO_ROUTE: 'data/REDIRECT_TO_ROUTE',
   REQUIRED_AUTHORIZATION: 'user/REQUIRED_AUTHORIZATION',
   SET_ACTIVE_OFFER: 'data/SET_ACTIVE_OFFER',
   SET_CITY: 'data/SET_CITY',
   SET_COMMENT: 'data/SET_COMMENT',
+  SET_FAVORITE: 'SET_FAVORITE',
   SET_RATING: 'data/SET_RATING',
   SET_SORT_TYPE: 'data/SET_SORT_TYPE',
   SET_USER: 'user/SET_USER',
@@ -20,6 +22,11 @@ export const ActionType = {
 export const loadComments = createAction(
   ActionType.LOAD_COMMENTS,
   (comments) => ({payload: comments}),
+);
+
+export const loadFavorites = createAction(
+  ActionType.LOAD_FAVORITES,
+  (offers) => ({payload: offers}),
 );
 
 export const loadOffer = createAction(
@@ -51,11 +58,6 @@ export const requireAuthorization = createAction(
   (status) => ({payload: status}),
 );
 
-export const setConnectionStatus = createAction(
-  ActionType.CONNECTION_STATUS,
-  (status) => ({payload: status}),
-);
-
 export const setActiveOffer = createAction(
   ActionType.SET_ACTIVE_OFFER,
   (offer) => ({payload: offer}),
@@ -66,9 +68,19 @@ export const setCity = createAction(
   (city) => ({payload: city}),
 );
 
+export const setConnectionStatus = createAction(
+  ActionType.CONNECTION_STATUS,
+  (status) => ({payload: status}),
+);
+
 export const setComment = createAction(
   ActionType.SET_COMMENT,
   (comment) => ({payload: comment}),
+);
+
+export const setFavorite = createAction(
+  ActionType.SET_FAVORITE,
+  (offer) => ({payload: offer}),
 );
 
 export const setRating = createAction(
