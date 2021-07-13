@@ -1,19 +1,21 @@
 import React, {useRef, useState} from 'react';
-import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {getCity, getActiveOffer} from '../../store/app-data/selectors';
 import {login} from '../../store/api-actions';
 import Header from '../header/header';
 import ErrorPopup from '../error-popup/error-popup';
-import cityProp from '../cities-container/city.prop';
-import offerProps from '../offer-card/offer-card.prop';
 import {AppRoute} from '../../const';
 import {isWrongPassword} from '../../utils';
 
-function LoginPage({city, activeOffer, onSubmit}) {
+function LoginPage() {
   const loginRef = useRef();
   const passRef = useRef();
   const [error, setError] = useState(false);
+
+  const dispatch = useDispatch();
+  const city = useSelector(getCity);
+  const activeOffer = useSelector(getActiveOffer);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -23,11 +25,13 @@ function LoginPage({city, activeOffer, onSubmit}) {
       return;
     }
 
-    onSubmit({
-      login: loginRef.current.value,
-      password: passRef.current.value,
-      activeOffer,
-    });
+    dispatch(
+      login({
+        login: loginRef.current.value,
+        password: passRef.current.value,
+        activeOffer,
+      }),
+    );
   };
 
   return (
@@ -86,22 +90,4 @@ function LoginPage({city, activeOffer, onSubmit}) {
   );
 }
 
-LoginPage.propTypes = {
-  city: cityProp,
-  activeOffer: PropTypes.oneOfType([offerProps, PropTypes.object]),
-  onSubmit: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = ({city, activeOffer}) => ({
-  city,
-  activeOffer,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit(data) {
-    dispatch(login(data));
-  },
-});
-
-export {LoginPage};
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+export default LoginPage;

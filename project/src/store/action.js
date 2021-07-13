@@ -1,74 +1,87 @@
+import {createAction} from '@reduxjs/toolkit';
+
 export const ActionType = {
-  CHANGE_CITY: 'data/CHANGE_CITY',
   CONNECTION_STATUS: 'state/CONNECTION_STATUS',
-  LOAD_COMMENTS: 'data/LOAD_COMMENTS',
-  LOAD_NEARBY_OFFERS: 'data/LOAD_NEARBY_OFFERS',
   LOAD_OFFER: 'data/LOAD_OFFER',
+  LOAD_NEARBY: 'data/LOAD_NEARBY',
+  LOAD_COMMENTS: 'data/LOAD_COMMENTS',
   LOAD_OFFERS: 'data/LOAD_OFFERS',
   LOGOUT: 'user/logout',
   REDIRECT_TO_ROUTE: 'data/REDIRECT_TO_ROUTE',
   REQUIRED_AUTHORIZATION: 'user/REQUIRED_AUTHORIZATION',
   SET_ACTIVE_OFFER: 'data/SET_ACTIVE_OFFER',
+  SET_CITY: 'data/SET_CITY',
   SET_COMMENT: 'data/SET_COMMENT',
   SET_RATING: 'data/SET_RATING',
   SET_SORT_TYPE: 'data/SET_SORT_TYPE',
   SET_USER: 'user/SET_USER',
 };
 
-export const ActionCreator = {
-  changeCity: (city) => ({
-    type: ActionType.CHANGE_CITY,
-    payload: city,
-  }),
-  loadComments: (comments) => ({
-    type: ActionType.LOAD_COMMENTS,
-    payload: comments,
-  }),
-  loadNearbyOffers: (offers) => ({
-    type: ActionType.LOAD_NEARBY_OFFERS,
-    payload: offers,
-  }),
-  loadOffer: (offer) => ({
-    type: ActionType.LOAD_OFFER,
-    payload: offer,
-  }),
-  loadOffers: (offers) => ({
-    type: ActionType.LOAD_OFFERS,
-    payload: offers,
-  }),
-  logout: () => ({
-    type: ActionType.LOGOUT,
-  }),
-  redirectToRoute: (url) => ({
-    type: ActionType.REDIRECT_TO_ROUTE,
-    payload: url,
-  }),
-  requireAuthorization: (status) => ({
-    type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: status,
-  }),
-  setComment: (comment) => ({
-    type: ActionType.SET_COMMENT,
-    payload: comment,
-  }),
-  setRating: (rating) => ({
-    type: ActionType.SET_RATING,
-    payload: rating,
-  }),
-  setActiveOffer: (offer) => ({
-    type: ActionType.SET_ACTIVE_OFFER,
-    payload: offer,
-  }),
-  setConnectionStatus: (status) => ({
-    type: ActionType.CONNECTION_STATUS,
-    payload: status,
-  }),
-  setSortType: (type) => ({
-    type: ActionType.SET_SORT_TYPE,
-    payload: type,
-  }),
-  setUser: (user) => ({
-    type: ActionType.SET_USER,
-    payload: user,
-  }),
-};
+export const loadComments = createAction(
+  ActionType.LOAD_COMMENTS,
+  (comments) => ({payload: comments}),
+);
+
+export const loadOffer = createAction(
+  ActionType.LOAD_OFFER,
+  (offer) => ({payload: offer}),
+);
+
+export const loadOffers = createAction(
+  ActionType.LOAD_OFFERS,
+  (offers) => ({payload: offers}),
+);
+
+export const loadNearby = createAction(
+  ActionType.LOAD_NEARBY,
+  (offers) => ({payload: offers}),
+);
+
+export const logout = createAction(
+  ActionType.LOGOUT,
+);
+
+export const redirectToRoute = createAction(
+  ActionType.REDIRECT_TO_ROUTE,
+  (url) => ({payload: url}),
+);
+
+export const requireAuthorization = createAction(
+  ActionType.REQUIRED_AUTHORIZATION,
+  (status) => ({payload: status}),
+);
+
+export const setConnectionStatus = createAction(
+  ActionType.CONNECTION_STATUS,
+  (status) => ({payload: status}),
+);
+
+export const setActiveOffer = createAction(
+  ActionType.SET_ACTIVE_OFFER,
+  (offer) => ({payload: offer}),
+);
+
+export const setCity = createAction(
+  ActionType.SET_CITY,
+  (city) => ({payload: city}),
+);
+
+export const setComment = createAction(
+  ActionType.SET_COMMENT,
+  (comment) => ({payload: comment}),
+);
+
+export const setRating = createAction(
+  ActionType.SET_RATING,
+  (rating) => ({payload: rating}),
+);
+
+export const setSortType = createAction(
+  ActionType.SET_SORT_TYPE,
+  (type) => ({payload: type}),
+);
+
+export const setUser = createAction(
+  ActionType.SET_USER,
+  (user) => ({payload: user}),
+);

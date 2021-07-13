@@ -1,9 +1,13 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
+import {useSelector, useDispatch} from 'react-redux';
+import {getSortType} from '../../store/app-data/selectors';
+import {setSortType} from '../../store/action';
 import {SortTypes} from '../../const';
 
-function Sorting({sortType, setSortType}) {
+function Sorting() {
   const [sortList, setSortList] = useState(false);
+  const dispatch = useDispatch();
+  const sortType = useSelector(getSortType);
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -25,7 +29,7 @@ function Sorting({sortType, setSortType}) {
                 : 'places__option'}
               onClick={() => {
                 setSortList(false);
-                setSortType(type);
+                dispatch(setSortType(type));
               }}
             >
               {type}
@@ -35,11 +39,5 @@ function Sorting({sortType, setSortType}) {
     </form>
   );
 }
-
-
-Sorting.propTypes = {
-  sortType: PropTypes.string.isRequired,
-  setSortType: PropTypes.func.isRequired,
-};
 
 export default Sorting;

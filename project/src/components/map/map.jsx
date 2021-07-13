@@ -1,5 +1,7 @@
 import React, {useRef, useEffect} from 'react';
 import PropTypes from 'prop-types';
+import {useSelector} from 'react-redux';
+import {getActiveOffer} from '../../store/app-data/selectors';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/useMap/useMap';
@@ -7,9 +9,10 @@ import cityProp from '../cities-container/city.prop';
 import offerProps from '../offer-card/offer-card.prop';
 import {URL_MARKER_DEFAULT, URL_MARKER_ACTIVE} from '../../const';
 
-function Map({city, offers, activeOffer}) {
+function Map({city, offers}) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
+  const activeOffer = useSelector(getActiveOffer);
   const prevActiveOffer = useRef();
 
   const defaultCustomIcon = leaflet.icon({
@@ -56,7 +59,6 @@ function Map({city, offers, activeOffer}) {
 Map.propTypes = {
   city: cityProp,
   offers: PropTypes.arrayOf(offerProps),
-  activeOffer: PropTypes.oneOfType([offerProps, PropTypes.object]),
 };
 
 export default Map;

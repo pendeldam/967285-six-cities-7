@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 import React from 'react';
-import {RatingPercent} from '../../const.js';
-import {formatDate} from '../../utils';
+import {formatDate, getRatingStyle} from '../../utils';
 import reviewProps from '../review-item/review-item.prop';
 
 function ReviewItem({review}) {
@@ -21,7 +20,7 @@ function ReviewItem({review}) {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: RatingPercent[rating]}}></span>
+            <span style={{width: getRatingStyle(rating)}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

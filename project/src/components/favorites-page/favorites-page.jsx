@@ -8,7 +8,7 @@ import FavoriteOfferCard from '../offer-card/favorite-offer-card';
 import cityProp from '../cities-container/city.prop';
 import offerProps from '../offer-card/offer-card.prop';
 import {AppRoute} from '../../const';
-import {getFavorites} from '../../store/selectors';
+import {getFavorites} from '../../store/app-data/selectors';
 
 function FavoritesPage({city, offers}) {
   return (
