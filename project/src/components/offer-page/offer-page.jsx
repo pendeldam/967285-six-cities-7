@@ -9,6 +9,7 @@ import ReviewList from '../review-list/review-list';
 import Map from '../../components/map/map';
 import OfferList from '../offer-list/offer-list';
 import NearestOfferCard from '../offer-card/nearest-offer-card';
+import FavoriteButton from '../../components/favorite-button/favorite-button';
 import LoadingScreen from '../loading-screen/loading-screen';
 import ErrorPage from '../error-page/error-page';
 import {CONNECTION_STATUS, OfferTypes} from '../../const';
@@ -58,12 +59,14 @@ function OfferPage() {
                 <h1 className="property__name">
                   {offer.title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
-                  <svg className="property__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <FavoriteButton
+                  id={offer.id}
+                  styles={{
+                    bookmark: 'property',
+                    width: 31,
+                    height: 33,
+                  }}
+                />
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">

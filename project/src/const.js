@@ -113,6 +113,16 @@ export const SortTypes = {
   TOP_RATED: 'Top rated firs',
 };
 
+export const checkFavorite = (offers, id) => {
+  const offer = offers.find((it) => it.id === id);
+
+  if (offer) {
+    return offer.isFavorite;
+  }
+
+  return false;
+};
+
 const URL_MARKER_DEFAULT = '../img/pin.svg';
 const URL_MARKER_ACTIVE = '../img/pin-active.svg';
 
