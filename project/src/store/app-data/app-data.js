@@ -1,16 +1,13 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {loadComments, loadFavorites, loadOffer, loadOffers, loadNearby, setActiveOffer, setCity, setSortType, setConnectionStatus, setComment, setRating, setFavorite} from '../action';
+import {loadComments, loadFavorites, loadOffer, loadOffers, loadNearby, setActiveOffer, setCity, setSortType, setComment, setRating, setFavorite} from '../action';
 import {adapt2Client} from '../../utils';
-import {CONNECTION_STATUS, DEFAULT_CITY, SortTypes} from '../../const';
+import {DEFAULT_CITY, SortTypes} from '../../const';
 
 const initialState = {
   activeOffer: null,
   city: DEFAULT_CITY,
   comment: '',
   favorites: [],
-  isCommentLoaded: CONNECTION_STATUS.SUCCESS,
-  isDataLoaded: CONNECTION_STATUS.WAIT,
-  isFavoriteLoaded: CONNECTION_STATUS.SUCCESS,
   nearbyOffers: [],
   offer: null,
   offers: [],
@@ -43,9 +40,6 @@ export const appData = createReducer(initialState, (builder) => {
     })
     .addCase(loadComments, (state, action) => {
       state.reviews = action.payload.map(adapt2Client);
-    })
-    .addCase(setConnectionStatus, (state, action) => {
-      state[action.payload.type] = action.payload.status;
     })
     .addCase(setComment, (state, action) => {
       state.comment = action.payload;
