@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
 import {useLocation, useParams} from 'react-router';
 import {useSelector, useDispatch} from 'react-redux';
-import {getIsDataLoaded, getOffer, getNearbyOffers} from '../../store/app-data/selectors';
+import {getOffer, getNearbyOffers} from '../../store/app-data/selectors';
+import {getIsDataLoaded} from '../../store/app-state/selectors';
 import {getAuthorizationStatus} from '../../store/app-user/selectors';
 import {fetchOffer} from '../../store/api-actions';
 import Header from '../header/header';

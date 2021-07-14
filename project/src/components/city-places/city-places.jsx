@@ -1,9 +1,9 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
+import {getSortedOffers} from '../../store/app-data/selectors';
 import Sorting from '../sorting/sorting';
 import OffersList from '../offer-list/offer-list';
 import PlaceOfferCard from '../offer-card/place-offer-card';
-import {getSortedOffers} from '../../store/app-data/selectors';
 import cityProp from '../cities-container/city.prop';
 
 function CityPlaces({city}) {
