@@ -2,6 +2,7 @@ import {createAction} from '@reduxjs/toolkit';
 
 export const ActionType = {
   CONNECTION_STATUS: 'data/CONNECTION_STATUS',
+  GET_ERROR_INFO: 'GET_ERROR_INFO',
   LOAD_COMMENTS: 'data/LOAD_COMMENTS',
   LOAD_FAVORITES: 'LOAD_FAVORITES',
   LOAD_OFFER: 'data/LOAD_OFFER',
@@ -18,6 +19,11 @@ export const ActionType = {
   SET_SORT_TYPE: 'data/SET_SORT_TYPE',
   SET_USER: 'user/SET_USER',
 };
+
+export const getErrorInfo = createAction(
+  ActionType.GET_ERROR_INFO,
+  (error) => ({payload: error}),
+);
 
 export const loadComments = createAction(
   ActionType.LOAD_COMMENTS,
