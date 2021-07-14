@@ -1,3 +1,9 @@
+export const PopupType = {
+  PAGE: 'PAGE',
+  COMMENT: 'COMMENT',
+  FAVORITE: 'FAVORITE',
+};
+
 export const AuthorizationStatus = {
   AUTH: 'AUTH',
   NO_AUTH: 'NO_AUTH',

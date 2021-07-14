@@ -67,12 +67,57 @@
 .popup {
   position: absolute;
   width: 100%;
+  padding: 0 10px;
   line-height: 30px;
-  text-align: center;
+  background-color: #4481c3;
+  border-radius: 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .popup__error {
-  background-color: pink;
+  color: #fff;
+}
+
+.popup__button {
+  position: relative;
+  background-color: transparent;
+  border: none;
+  width: 20px;
+  height: 20px;
+}
+
+.popup__button::after {
+  content: "";
+  position: absolute;
+  top: 7px;
+  right: 0;
+  width: 20px;
+  height: 3px;
+  background-color: #fff;
+  transform: rotate(45deg);
+}
+
+.popup__button::before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  right: 0;
+  width: 20px;
+  height: 3px;
+  background-color: #fff;
+  transform: rotate(-45deg);
+}
+
+.popup__button:hover:after,
+.popup__button:hover::before {
+  background-color: red;
+}
+
+.popup__button:active:after,
+.popup__button:active::before {
+  background-color: #fff;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -1,11 +1,12 @@
-import React, {useRef, useState} from 'react';
+import React, {Fragment, useRef, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import {getCity, getActiveOffer} from '../../store/app-data/selectors';
+import {getIsDataLoaded} from '../../store/app-state/selectors';
 import {login} from '../../store/api-actions';
 import Header from '../header/header';
-import ErrorPopup from '../error-popup/error-popup';
-import {AppRoute} from '../../const';
+import ErrorPage from '../error-page/error-page';
+import {AppRoute, CONNECTION_STATUS} from '../../const';
 import {isWrongPassword} from '../../utils';
 
 function LoginPage() {
@@ -16,6 +17,7 @@ function LoginPage() {
   const dispatch = useDispatch();
   const city = useSelector(getCity);
   const activeOffer = useSelector(getActiveOffer);
+  const isDataLoaded = useSelector(getIsDataLoaded);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -33,6 +35,10 @@ function LoginPage() {
       }),
     );
   };
+
+  if (isDataLoaded === CONNECTION_STATUS.ERROR) {
+    return <ErrorPage/>;
+  }
 
   return (
     <div className="page page--gray page--login">
@@ -69,10 +75,11 @@ function LoginPage() {
                   ref={passRef}
                 />
                 {error &&
-                  <ErrorPopup
-                    style={{bottom: '-80px'}}
-                    message={'Passwords with only spaces not allowed'}
-                  />}
+                  <Fragment>
+                    <div className="popup__error popup" style={{bottom: '-80px'}}>
+                      <span>Passwords with only spaces not allowed</span>
+                    </div>
+                  </Fragment>}
               </div>
               <button className="login__submit form__submit button" type="submit">Sign in</button>
             </form>
