@@ -7,6 +7,8 @@ export const getSortType = ({DATA}) => DATA.sortType;
 
 export const getOffers = ({DATA}) => DATA.offers;
 
+export const getFavorites = ({DATA}) => DATA.favorites;
+
 export const getCity = ({DATA}) => DATA.city;
 
 export const getOffer = ({DATA}) => DATA.offer;
@@ -15,27 +17,22 @@ export const getActiveOffer = ({DATA}) => DATA.activeOffer;
 
 export const getNearbyOffers = ({DATA}) => DATA.nearbyOffers;
 
+export const getComment = ({DATA}) => DATA.comment;
+
+export const getIsCommentLoaded = ({DATA}) => DATA.isCommentLoaded;
+
+export const getIsDataLoaded = ({DATA}) => DATA.isDataLoaded;
+
+export const getIsFavoriteLoaded = ({DATA}) => DATA.isFavoriteLoaded;
+
+export const getRating = ({DATA}) => DATA.rating;
+
 export const getCityOffers = createSelector(
   [getCity, getOffers],
   (city, offers) => offers.filter((offer) => (
     offer.city.name === city.name
   )),
 );
-
-export const getComment = ({DATA}) => DATA.comment;
-
-export const getFavorites = createSelector(
-  [getCity, getOffers],
-  (city, offers) => offers.filter((offer) => (
-    offer.city.name === city.name && offer.isFavorite === true
-  )),
-);
-
-export const getIsDataLoaded = ({DATA}) => DATA.isDataLoaded;
-
-export const getIsCommentLoaded = ({DATA}) => DATA.isCommentLoaded;
-
-export const getRating = ({DATA}) => DATA.rating;
 
 export const getSortedOffers = createSelector(
   [getSortType, getCityOffers],
@@ -55,8 +52,7 @@ export const getSortedOffers = createSelector(
 
 export const getSortedReviews = createSelector(
   [getReviews],
-  (reviews) => reviews
-    .slice()
+  (reviews) => [...reviews]
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 10),
 );
