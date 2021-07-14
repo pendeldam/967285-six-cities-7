@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import {getCity, getOffers} from '../../store/app-data/selectors';
+import {getIsDataLoaded} from '../../store/app-state/selectors';
 import {fetchOffersList} from '../../store/api-actions';
-import {getIsDataLoaded, getCity, getOffers} from '../../store/app-data/selectors';
 import Header from '../header/header';
 import CitiesList from '../cities-list/cities-list';
 import CitiesContainer from '../cities-container/cities-container';

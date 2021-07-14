@@ -1,10 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {useSelector} from 'react-redux';
+import {getFavorites} from '../../store/app-data/selectors';
 import Header from '../header/header';
 import FavoritesList from '../favorites-list/favorites-list';
 import {AppRoute} from '../../const';
-import {getFavorites} from '../../store/app-data/selectors';
 
 function FavoritesPage() {
   const favorites = useSelector(getFavorites);

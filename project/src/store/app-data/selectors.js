@@ -3,6 +3,8 @@ import {SortTypes} from '../../const';
 
 const getReviews = ({DATA}) => DATA.reviews;
 
+export const getErrorStats = ({DATA}) => DATA.error;
+
 export const getSortType = ({DATA}) => DATA.sortType;
 
 export const getOffers = ({DATA}) => DATA.offers;

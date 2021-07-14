@@ -98,6 +98,10 @@ export const login = ({login: email, password, activeOffer}) => (dispatch, _getS
         dispatch(redirectToRoute(AppRoute.ROOT));
       }
     })
+    .catch(() => dispatch(setConnectionStatus({
+      type: REQUEST_SOURCE.PAGE,
+      status: CONNECTION_STATUS.ERROR,
+    })))
 );
 
 export const signout = () => (dispatch, _getState, api) => (
