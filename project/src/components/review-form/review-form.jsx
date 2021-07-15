@@ -7,7 +7,7 @@ import {setComment, setRating} from '../../store/action';
 import {postComment} from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
 import ErrorPopup from '../error-popup/error-popup';
-import {CONNECTION_STATUS, Rating, PopupType} from '../../const';
+import {CONNECTION_STATUS, RatingWords, PopupType} from '../../const';
 
 function ReviewFrom({id}) {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ function ReviewFrom({id}) {
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {Object.entries(Rating).reverse().map(([key, value]) => (
+        {Object.entries(RatingWords).reverse().map(([key, value]) => (
           <Fragment key={key}>
             <input
               className="form__rating-input visually-hidden"
