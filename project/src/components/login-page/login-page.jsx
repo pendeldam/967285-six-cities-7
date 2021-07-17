@@ -1,12 +1,13 @@
 import React, {Fragment, useRef, useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import {getCity, getActiveOffer} from '../../store/app-data/selectors';
 import {getIsDataLoaded} from '../../store/app-state/selectors';
+import {getAuthorizationStatus} from '../../store/app-user/selectors';
 import {login} from '../../store/api-actions';
 import Header from '../header/header';
 import ErrorPage from '../error-page/error-page';
-import {AppRoute, CONNECTION_STATUS} from '../../const';
+import {AppRoute, CONNECTION_STATUS, AuthorizationStatus} from '../../const';
 import {isWrongPassword} from '../../utils';
 
 function LoginPage() {
@@ -18,6 +19,7 @@ function LoginPage() {
   const city = useSelector(getCity);
   const activeOffer = useSelector(getActiveOffer);
   const isDataLoaded = useSelector(getIsDataLoaded);
+  const authorizationStatus = useSelector(getAuthorizationStatus);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -35,6 +37,10 @@ function LoginPage() {
       }),
     );
   };
+
+  if (authorizationStatus === AuthorizationStatus.AUTH) {
+    return <Redirect to={AppRoute.ROOT}/>;
+  }
 
   if (isDataLoaded === CONNECTION_STATUS.ERROR) {
     return <ErrorPage/>;
@@ -76,7 +82,15 @@ function LoginPage() {
                 />
                 {error &&
                   <Fragment>
-                    <div className="popup__error popup" style={{bottom: '-80px'}}>
+                    <div
+                      className="popup__error popup"
+                      style={{bottom: '-80px',
+                              display: 'block',
+                              textAlign: 'center',
+                              color: 'black',
+                              backgroundColor: 'pink',
+                            }}
+                    >
                       <span>Passwords with only spaces not allowed</span>
                     </div>
                   </Fragment>}

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import cityProp from '../cities-container/city.prop';
 
 function EmptyOfferList({city}) {

@@ -1,10 +1,15 @@
 import axios from 'axios';
 import {BACKEND_URL, REQUEST_TIMEOUT, HttpCode} from '../const';
 
+const token = localStorage.getItem('x-token') ?? null;
+
 export const createAPI = (onUnauthorized, onError) => {
   const api = axios.create({
     baseURL: BACKEND_URL,
     timeout: REQUEST_TIMEOUT,
+    headers: {
+      'x-token': token,
+    },
   });
 
   const onSuccess = (response) => response;

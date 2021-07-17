@@ -1,5 +1,26 @@
-import {loadOffers, loadOffer, loadFavorites, loadNearby, loadComments, setComment, setFavorite, setRating, setConnectionStatus, setUser, requireAuthorization, redirectToRoute, logout} from './action';
-import {AuthorizationStatus, APIRoute, AppRoute, CONNECTION_STATUS, REQUEST_SOURCE} from '../const';
+import {
+  loadComments,
+  loadFavorites,
+  loadNearby,
+  loadOffer,
+  loadOffers,
+  logout,
+  redirectToRoute,
+  requireAuthorization,
+  setComment,
+  setConnectionStatus,
+  setFavorite,
+  setRating,
+  setUser
+} from './action';
+
+import {
+  APIRoute,
+  AuthorizationStatus,
+  AppRoute,
+  CONNECTION_STATUS,
+  REQUEST_SOURCE
+} from '../const';
 
 export const fetchOffersList = () => (dispatch, _getState, api) => {
   dispatch(setConnectionStatus({
@@ -76,7 +97,14 @@ export const postComment = (id, comment) => (dispatch, _getState, api) => {
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
-    .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(({data: user}) => {
+      dispatch(requireAuthorization(AuthorizationStatus.AUTH));
+      dispatch(setUser(user));
+      api.get(APIRoute.FAVORITES)
+        .then(({data: favorites}) => {
+          dispatch(loadFavorites(favorites));
+        });
+    })
     .catch(() => {})
 );
 

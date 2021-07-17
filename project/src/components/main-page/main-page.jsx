@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {getCity, getOffers} from '../../store/app-data/selectors';
+import {getCity, getOffers, getCityOffers} from '../../store/app-data/selectors';
 import {getIsDataLoaded} from '../../store/app-state/selectors';
 import {fetchOffersList} from '../../store/api-actions';
 import Header from '../header/header';
@@ -15,6 +15,7 @@ function MainPage() {
   const isDataLoaded = useSelector(getIsDataLoaded);
   const city = useSelector(getCity);
   const offers = useSelector(getOffers);
+  const cityOffers = useSelector(getCityOffers);
 
   useEffect(() => {
     if (!offers.length) {
@@ -32,7 +33,7 @@ function MainPage() {
 
   return (
     <div
-      className={offers.length
+      className={cityOffers.length
         ? 'page page--gray page--main'
         : 'page page--gray page--main page__main--index-empty'}
     >
