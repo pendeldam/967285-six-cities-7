@@ -16,7 +16,7 @@ function EmptyOfferList({city}) {
 }
 
 EmptyOfferList.propTypes = {
-  cityProp,
+  city: cityProp,
 };
 
 export default EmptyOfferList;

@@ -1,4 +1,4 @@
-import React, {Fragment, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import {getCity, getActiveOffer} from '../../store/app-data/selectors';
@@ -81,19 +81,17 @@ function LoginPage() {
                   ref={passRef}
                 />
                 {error &&
-                  <Fragment>
-                    <div
-                      className="popup__error popup"
-                      style={{bottom: '-80px',
-                              display: 'block',
-                              textAlign: 'center',
-                              color: 'black',
-                              backgroundColor: 'pink',
-                            }}
-                    >
-                      <span>Passwords with only spaces not allowed</span>
-                    </div>
-                  </Fragment>}
+                  <div
+                    className="popup__error popup"
+                    style={{bottom: '-80px',
+                      display: 'block',
+                      textAlign: 'center',
+                      color: 'black',
+                      backgroundColor: 'pink',
+                    }}
+                  >
+                    Passwords with only spaces not allowed
+                  </div>}
               </div>
               <button className="login__submit form__submit button" type="submit">Sign in</button>
             </form>

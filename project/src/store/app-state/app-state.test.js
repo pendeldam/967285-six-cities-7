@@ -1,6 +1,6 @@
 import {appState} from './app-state';
 import {ActionType} from '../action';
-import {CONNECTION_STATUS, REQUEST_SOURCE} from '../../const';
+import {CONNECTION_STATUS} from '../../const';
 
 const error = {
   data: {

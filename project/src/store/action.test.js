@@ -6,8 +6,8 @@ import {
   setComment,
   setConnectionStatus,
   setRating,
-  setSortType,
-  setUser
+  setSortType
+  // setUser
 } from './action';
 
 describe('Actions', () => {

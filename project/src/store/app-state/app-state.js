@@ -22,6 +22,6 @@ export const appState = createReducer(initialState, (builder) => {
     })
     .addCase(setConnectionStatus, (state, action) => {
       state[action.payload.type] = action.payload.status;
-    })
+    });
 });
 

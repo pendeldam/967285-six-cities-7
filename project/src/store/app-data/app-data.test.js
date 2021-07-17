@@ -47,7 +47,7 @@ const comment = {
     id: 4,
     isPro: false,
     name: 'Max',
-  }
+  },
 };
 
 const initialState = {

@@ -50,18 +50,17 @@ function ReviewFrom({id}) {
           </Fragment>
         ))}
       </div>
-      {isCommentLoaded === CONNECTION_STATUS.WAIT
-        ? <LoadingScreen/>
-        : <textarea
-        className="reviews__textarea form__textarea"
-        id="review"
-        name="review"
-        placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={(evt) => dispatch(setComment(evt.target.value))}
-        disabled={isCommentLoaded === CONNECTION_STATUS.WAIT}
-        value={comment}
-      />
-      }
+      {isCommentLoaded === CONNECTION_STATUS.WAIT ?
+        <LoadingScreen/> :
+        <textarea
+          className="reviews__textarea form__textarea"
+          id="review"
+          name="review"
+          placeholder="Tell how was your stay, what you like and what can be improved"
+          onChange={(evt) => dispatch(setComment(evt.target.value))}
+          disabled={isCommentLoaded === CONNECTION_STATUS.WAIT}
+          value={comment}
+        />}
       <div className="reviews__button-wrapper">
         {isCommentLoaded === CONNECTION_STATUS.ERROR &&
         <ErrorPopup

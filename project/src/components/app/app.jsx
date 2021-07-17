@@ -17,9 +17,9 @@ function App() {
   const authorizationStatus = useSelector(getAuthorizationStatus);
 
   if (isCheckedAuth(authorizationStatus)) {
-    return <LoadingScreen/>
+    return <LoadingScreen/>;
   }
-  
+
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
