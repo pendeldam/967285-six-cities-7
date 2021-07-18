@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {useLocation, useParams} from 'react-router';
 import {useSelector, useDispatch} from 'react-redux';
 import {getOffer, getNearbyOffers} from '../../store/app-data/selectors';
-import {getIsDataLoaded} from '../../store/app-state/selectors';
+import {getIsDataLoaded, getIsFavoriteLoaded} from '../../store/app-state/selectors';
 import {getAuthorizationStatus} from '../../store/app-user/selectors';
 import {fetchOffer} from '../../store/api-actions';
 import Header from '../header/header';
@@ -12,8 +12,9 @@ import OfferList from '../offer-list/offer-list';
 import NearestOfferCard from '../offer-card/nearest-offer-card';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
 import LoadingScreen from '../loading-screen/loading-screen';
+import ErrorPopup from '../error-popup/error-popup';
 import ErrorPage from '../error-page/error-page';
-import {CONNECTION_STATUS, OfferTypes, RatingPercent} from '../../const';
+import {CONNECTION_STATUS, OfferTypes, RatingPercent, PopupType} from '../../const';
 import {roundRating} from '../../utils';
 
 function OfferPage() {
@@ -24,6 +25,7 @@ function OfferPage() {
   const offer = useSelector(getOffer);
   const nearbyOffers = useSelector(getNearbyOffers);
   const isDataLoaded = useSelector(getIsDataLoaded);
+  const isFavoriteLoaded = useSelector(getIsFavoriteLoaded);
   const authorizationStatus = useSelector(getAuthorizationStatus);
 
   useEffect(() => dispatch(fetchOffer(id)), [location]);
@@ -41,6 +43,12 @@ function OfferPage() {
       <Header/>
       <main className="page__main page__main--property">
         <section className="property">
+          {isFavoriteLoaded === CONNECTION_STATUS.ERROR &&
+            <ErrorPopup
+              id={PopupType.FAVORITE}
+              style={{left: '35vw'}}
+              message={'Connection error. Please, try later...'}
+            />}
           <div className="property__gallery-container container">
             <div className="property__gallery">
               {offer.images.slice(0, 6).map((image) => (

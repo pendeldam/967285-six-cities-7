@@ -65,7 +65,7 @@ function ReviewFrom({id}) {
         {isCommentLoaded === CONNECTION_STATUS.ERROR &&
         <ErrorPopup
           id={PopupType.COMMENT}
-          style={{bottom: '-45px'}}
+          style={{left: '35vw'}}
           message={'Connection error. Please, try later...'}
         />}
         <p className="reviews__help">

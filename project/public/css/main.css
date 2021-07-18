@@ -59,64 +59,40 @@
   }
 }
 
-.form__input-wrapper,
-.reviews__button-wrapper {
+.page--main {
   position: relative;
 }
 
 .popup {
-  position: absolute;
-  width: 100%;
-  padding: 0 10px;
+  position: fixed;
+  top: 50vh;
+  z-index: 1;
+  width: 350px;
+  padding: 30px 20px;
   line-height: 30px;
   background-color: #4481c3;
+  color: #fff;
   border-radius: 3px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
 }
 
-.popup__error {
-  color: #fff;
-}
-
 .popup__button {
-  position: relative;
-  background-color: transparent;
-  border: none;
-  width: 20px;
-  height: 20px;
-}
-
-.popup__button::after {
-  content: "";
-  position: absolute;
-  top: 7px;
-  right: 0;
-  width: 20px;
-  height: 3px;
   background-color: #fff;
-  transform: rotate(45deg);
+  border-radius: 3px;
+  width: 100px;
+  margin-top: 10px;
+  padding: 3px 10px;
+  border: 1px solid #fff;
+  cursor: pointer;
 }
 
-.popup__button::before {
-  content: "";
-  position: absolute;
-  top: 7px;
-  right: 0;
-  width: 20px;
-  height: 3px;
-  background-color: #fff;
-  transform: rotate(-45deg);
+.popup__button:hover {
+  color: red;
 }
 
-.popup__button:hover:after,
-.popup__button:hover::before {
-  background-color: red;
-}
-
-.popup__button:active:after,
-.popup__button:active::before {
+.popup__button:active {
   background-color: #fff;
 }
 

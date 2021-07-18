@@ -4,7 +4,7 @@ import {useDispatch} from 'react-redux';
 import {setConnectionStatus} from '../../store/action';
 import {PopupType, CONNECTION_STATUS, REQUEST_SOURCE} from '../../const';
 
-function ErrorPopup({id, message, style}) {
+function ErrorPopup({id, style, message}) {
   const dispatch = useDispatch();
 
   const handleClosePopup = (evt) => {
@@ -35,25 +35,23 @@ function ErrorPopup({id, message, style}) {
   };
 
   return (
-    <div
-      style={style}
-      className="popup popup__error"
-    >
+    <div className="popup popup__error" style={style}>
       <span className="popup__message">{message}</span>
       <button
-        aria-label="close"
         id={id}
         className="popup__button"
         onClick={handleClosePopup}
-      />
+      >
+        OK
+      </button>
     </div>
   );
 }
 
 ErrorPopup.propTypes = {
   id: PropTypes.string.isRequired,
+  style: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
-  style: PropTypes.object.isRequired,
 };
 
 export default ErrorPopup;
