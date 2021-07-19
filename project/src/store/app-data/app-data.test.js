@@ -78,7 +78,7 @@ describe('Reducer: appData', () => {
     expect(appData(initialState, action))
       .toEqual({
         ...initialState,
-        city: offer.city,
+        city: action.payload,
       });
   });
 
@@ -91,7 +91,7 @@ describe('Reducer: appData', () => {
     expect(appData(initialState, action))
       .toEqual({
         ...initialState,
-        comment: 'comment',
+        comment: action.payload,
       });
   });
 
@@ -104,7 +104,7 @@ describe('Reducer: appData', () => {
     expect(appData(initialState, action))
       .toEqual({
         ...initialState,
-        rating: 5,
+        rating: action.payload,
       });
   });
 
@@ -117,7 +117,7 @@ describe('Reducer: appData', () => {
     expect(appData(initialState, action))
       .toEqual({
         ...initialState,
-        sortType: 'type',
+        sortType: action.payload,
       });
   });
 
@@ -130,7 +130,7 @@ describe('Reducer: appData', () => {
     expect(appData(initialState, action))
       .toEqual({
         ...initialState,
-        activeOffer: offer,
+        activeOffer: action.payload,
       });
   });
 
@@ -143,9 +143,9 @@ describe('Reducer: appData', () => {
     expect(appData(initialState, action))
       .toEqual({
         ...initialState,
-        activeOffer: offer,
-        offer: offer,
-        city: offer.city,
+        activeOffer: action.payload,
+        offer: action.payload,
+        city: action.payload.city,
       });
   });
 
@@ -158,7 +158,7 @@ describe('Reducer: appData', () => {
     expect(appData(initialState, action))
       .toEqual({
         ...initialState,
-        offers: [offer, offer, offer],
+        offers: action.payload,
       });
   });
 
@@ -171,7 +171,7 @@ describe('Reducer: appData', () => {
     expect(appData(initialState, action))
       .toEqual({
         ...initialState,
-        nearbyOffers: [offer, offer, offer],
+        nearbyOffers: action.payload,
       });
   });
 
@@ -184,7 +184,7 @@ describe('Reducer: appData', () => {
     expect(appData(initialState, action))
       .toEqual({
         ...initialState,
-        reviews: [comment, comment, comment],
+        reviews: action.payload,
       });
   });
 
@@ -197,7 +197,7 @@ describe('Reducer: appData', () => {
     expect(appData(initialState, action))
       .toEqual({
         ...initialState,
-        favorites: [offer, offer, offer],
+        favorites: action.payload,
       });
   });
 });

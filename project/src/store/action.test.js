@@ -7,7 +7,6 @@ import {
   setConnectionStatus,
   setRating,
   setSortType
-  // setUser
 } from './action';
 
 describe('Actions', () => {
