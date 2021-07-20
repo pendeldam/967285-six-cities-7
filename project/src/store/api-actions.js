@@ -98,12 +98,13 @@ export const postComment = (id, comment) => (dispatch, _getState, api) => {
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
     .then(({data: user}) => {
-      dispatch(requireAuthorization(AuthorizationStatus.AUTH));
-      dispatch(setUser(user));
       api.get(APIRoute.FAVORITES)
         .then(({data: favorites}) => {
           dispatch(loadFavorites(favorites));
         });
+
+      dispatch(requireAuthorization(AuthorizationStatus.AUTH));
+      dispatch(setUser(user));
     })
     .catch(() => {})
 );
