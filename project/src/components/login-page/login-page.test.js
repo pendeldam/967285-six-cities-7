@@ -24,7 +24,7 @@ describe('Component: LoginPage', () => {
           <LoginPage/>
         </Router>
       </Provider>
-      );
+    );
 
     history.push('/login');
     render(fakeComponent);
