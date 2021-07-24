@@ -2,7 +2,7 @@ import React from 'react';
 
 function LoadingScreen() {
   return (
-    <div className="loader"/>
+    <div className="loader" data-testid="loading-screen"/>
   );
 }
 
