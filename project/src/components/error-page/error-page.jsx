@@ -13,7 +13,7 @@ function ErrorPage() {
       <Header/>
       <main className="page__main">
         <div className="container">
-          <h1>{error.code}.&nbsp;{error.text}</h1>
+          <h1 data-testid="error-heading">{error.code}.&nbsp;{error.text}</h1>
           <Link to={AppRoute.ROOT}>Back to Main page</Link>
           <img src="img/page-not-found.jpg" alt={`${error.code}.${error.text}`}/>
         </div>

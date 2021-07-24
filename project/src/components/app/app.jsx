@@ -1,6 +1,5 @@
 import React from 'react';
-import {Router as BrowserRouter, Switch, Route} from 'react-router-dom';
-import browserHistory from '../../browser-history';
+import {Switch, Route} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import {getAuthorizationStatus} from '../../store/app-user/selectors';
 import MainPage from '../main-page/main-page';
@@ -21,7 +20,6 @@ function App() {
   }
 
   return (
-    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
           <MainPage/>
@@ -39,7 +37,6 @@ function App() {
           <ErrorPage/>
         </Route>
       </Switch>
-    </BrowserRouter>
   );
 }
 
