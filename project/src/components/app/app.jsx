@@ -20,23 +20,23 @@ function App() {
   }
 
   return (
-      <Switch>
-        <Route exact path={AppRoute.ROOT}>
-          <MainPage/>
-        </Route>
-        <Route exact path={AppRoute.LOGIN}>
-          <LoginPage/>
-        </Route>
-        <PrivateRoute exact path={AppRoute.FAVORITES}
-          render={() => <FavoritesPage/>}
-        />
-        <Route path={`${AppRoute.OFFER}/:id`}>
-          <OfferPage/>
-        </Route>
-        <Route>
-          <ErrorPage/>
-        </Route>
-      </Switch>
+    <Switch>
+      <Route exact path={AppRoute.ROOT}>
+        <MainPage/>
+      </Route>
+      <Route exact path={AppRoute.LOGIN}>
+        <LoginPage/>
+      </Route>
+      <PrivateRoute exact path={AppRoute.FAVORITES}
+        render={() => <FavoritesPage/>}
+      />
+      <Route path={`${AppRoute.OFFER}/:id`}>
+        <OfferPage/>
+      </Route>
+      <Route>
+        <ErrorPage/>
+      </Route>
+    </Switch>
   );
 }
 
