@@ -86,9 +86,8 @@ function LoginPage() {
                 />
                 {error &&
                   <div
-                    className="popup__error popup"
-                    style={{bottom: '-80px',
-                      display: 'block',
+                    style={{
+                      lineHeight: '30px',
                       textAlign: 'center',
                       color: 'black',
                       backgroundColor: 'pink',

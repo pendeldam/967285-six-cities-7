@@ -2,7 +2,7 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import {Router} from 'react-router-dom';
 import configureStore from 'redux-mock-store';
-import {getByTestId, render, screen} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import {createMemoryHistory} from 'history';
 import FavoriteButton from './favorite-button';
 
@@ -48,7 +48,7 @@ describe('Component: FavoriteButton', () => {
       },
     });
 
-    const {container} = render(
+    render(
       <Provider store={store}>
         <Router history={history}>
           <FavoriteButton
