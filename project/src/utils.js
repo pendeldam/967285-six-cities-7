@@ -1,6 +1,20 @@
 import {AuthorizationStatus} from './const';
 
-export const getRatingStyle = (value) => `${value / 5 * 100}%`;
+export const getRandomIntegerNumber = (min, max) =>(Math.floor(Math.random() * (max - min) + min));
+
+export const getRandomArrayItem = (array) => array[getRandomIntegerNumber(0, array.length)];
+
+export const getRandomArray = (length, cb) => new Array(length)
+  .fill('')
+  .map(cb);
+
+export const roundRating = (value) => {
+  const result = value % 1 < 0.5
+    ? Math.floor(value)
+    : Math.ceil(value);
+
+  return result;
+};
 
 export const formatDate = (date) => new Date(date).toLocaleDateString('en-US', {month: 'long', year: 'numeric'});
 

@@ -59,20 +59,41 @@
   }
 }
 
-.form__input-wrapper,
-.reviews__button-wrapper {
+.page--main {
   position: relative;
 }
 
 .popup {
-  position: absolute;
-  width: 100%;
+  position: fixed;
+  top: 50vh;
+  z-index: 1;
+  width: 350px;
+  padding: 30px 20px;
   line-height: 30px;
-  text-align: center;
+  background-color: #4481c3;
+  color: #fff;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.popup__error {
-  background-color: pink;
+.popup__button {
+  background-color: #fff;
+  border-radius: 3px;
+  width: 100px;
+  margin-top: 10px;
+  padding: 3px 10px;
+  border: 1px solid #fff;
+  cursor: pointer;
+}
+
+.popup__button:hover {
+  color: red;
+}
+
+.popup__button:active {
+  background-color: #fff;
 }
 
 /*# sourceMappingURL=main.css.map */

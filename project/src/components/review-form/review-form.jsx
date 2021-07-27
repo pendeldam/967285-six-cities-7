@@ -1,11 +1,13 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {useSelector, useDispatch} from 'react-redux';
-import {getComment, getRating, getIsCommentLoaded} from '../../store/app-data/selectors';
+import {getComment, getRating} from '../../store/app-data/selectors';
+import {getIsCommentLoaded} from '../../store/app-state/selectors';
 import {setComment, setRating} from '../../store/action';
 import {postComment} from '../../store/api-actions';
+import LoadingScreen from '../loading-screen/loading-screen';
 import ErrorPopup from '../error-popup/error-popup';
-import {CONNECTION_STATUS, Rating} from '../../const';
+import {CONNECTION_STATUS, RatingWords, PopupType} from '../../const';
 
 function ReviewFrom({id}) {
   const dispatch = useDispatch();
@@ -28,7 +30,7 @@ function ReviewFrom({id}) {
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {Object.entries(Rating).reverse().map(([key, value]) => (
+        {Object.entries(RatingWords).reverse().map(([key, value]) => (
           <Fragment key={key}>
             <input
               className="form__rating-input visually-hidden"
@@ -48,19 +50,22 @@ function ReviewFrom({id}) {
           </Fragment>
         ))}
       </div>
-      <textarea
-        className="reviews__textarea form__textarea"
-        id="review"
-        name="review"
-        placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={(evt) => dispatch(setComment(evt.target.value))}
-        disabled={isCommentLoaded === CONNECTION_STATUS.WAIT}
-        value={comment}
-      />
+      {isCommentLoaded === CONNECTION_STATUS.WAIT ?
+        <LoadingScreen/> :
+        <textarea
+          className="reviews__textarea form__textarea"
+          id="review"
+          name="review"
+          placeholder="Tell how was your stay, what you like and what can be improved"
+          onChange={(evt) => dispatch(setComment(evt.target.value))}
+          disabled={isCommentLoaded === CONNECTION_STATUS.WAIT}
+          value={comment}
+        />}
       <div className="reviews__button-wrapper">
         {isCommentLoaded === CONNECTION_STATUS.ERROR &&
         <ErrorPopup
-          style={{bottom: '-40px'}}
+          id={PopupType.COMMENT}
+          style={{left: '35vw'}}
           message={'Connection error. Please, try later...'}
         />}
         <p className="reviews__help">

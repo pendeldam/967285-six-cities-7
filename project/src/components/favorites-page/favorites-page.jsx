@@ -1,13 +1,16 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {useSelector} from 'react-redux';
-import Header from '../header/header';
-import FavoritesList from '../favorites-list/favorites-list';
-import {AppRoute} from '../../const';
 import {getFavorites} from '../../store/app-data/selectors';
+import {getIsFavoriteLoaded} from '../../store/app-state/selectors';
+import Header from '../header/header';
+import ErrorPopup from '../error-popup/error-popup';
+import FavoritesList from '../favorites-list/favorites-list';
+import {CONNECTION_STATUS, AppRoute, PopupType} from '../../const';
 
 function FavoritesPage() {
   const favorites = useSelector(getFavorites);
+  const isFavoriteLoaded = useSelector(getIsFavoriteLoaded);
 
   return (
     <div className={!favorites.length
@@ -21,6 +24,12 @@ function FavoritesPage() {
         ? 'page__main page__main--favorites page__main--favorites-empty'
         : 'page__main page__main--favorites'}
       >
+        {isFavoriteLoaded === CONNECTION_STATUS.ERROR &&
+        <ErrorPopup
+          id={PopupType.FAVORITE}
+          style={{left: '35vw'}}
+          message={'Connection error. Please, try later...'}
+        />}
 
         <div className="page__favorites-container container">
           {!favorites.length ?

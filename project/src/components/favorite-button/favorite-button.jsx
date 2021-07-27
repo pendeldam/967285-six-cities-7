@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {useSelector, useDispatch} from 'react-redux';
-import {getFavorites, getIsFavoriteLoaded} from '../../store/app-data/selectors';
+import {getFavorites} from '../../store/app-data/selectors';
+import {getIsFavoriteLoaded} from '../../store/app-state/selectors';
 import {getAuthorizationStatus} from '../../store/app-user/selectors';
 import {redirectToRoute} from '../../store/action';
 import {sendFavorite} from '../../store/api-actions';

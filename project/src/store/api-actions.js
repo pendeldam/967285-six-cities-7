@@ -1,15 +1,37 @@
-import {loadOffers, loadOffer, loadFavorites, loadNearby, loadComments, setComment, setFavorite, setRating, setConnectionStatus, setUser, requireAuthorization, redirectToRoute, logout} from './action';
-import {AuthorizationStatus, APIRoute, AppRoute, CONNECTION_STATUS, REQUEST_SOURCE} from '../const';
+import {
+  loadComments,
+  loadFavorites,
+  loadNearby,
+  loadOffer,
+  loadOffers,
+  logout,
+  redirectToRoute,
+  requireAuthorization,
+  setComment,
+  setConnectionStatus,
+  setFavorite,
+  setRating,
+  setUser
+} from './action';
 
-export const fetchOffersList = () => (dispatch, _getState, api) => {
-  dispatch(setConnectionStatus({
-    type: REQUEST_SOURCE.PAGE,
-    status: CONNECTION_STATUS.WAIT,
-  }));
+import {
+  APIRoute,
+  AuthorizationStatus,
+  AppRoute,
+  CONNECTION_STATUS,
+  REQUEST_SOURCE
+} from '../const';
 
+export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.HOTELS)
     .then(({data}) => {
+      dispatch(setConnectionStatus({
+        type: REQUEST_SOURCE.PAGE,
+        status: CONNECTION_STATUS.WAIT,
+      }));
+
       dispatch(loadOffers(data));
+
       dispatch(setConnectionStatus({
         type: REQUEST_SOURCE.PAGE,
         status: CONNECTION_STATUS.SUCCESS,
@@ -20,18 +42,19 @@ export const fetchOffersList = () => (dispatch, _getState, api) => {
         type: REQUEST_SOURCE.PAGE,
         status: CONNECTION_STATUS.ERROR,
       }));
-    });
-};
+    })
+);
 
-export const fetchOffer = (id) => (dispatch, _getState, api) => {
-  dispatch(setConnectionStatus({
-    type: REQUEST_SOURCE.PAGE,
-    status: CONNECTION_STATUS.WAIT,
-  }));
-
+export const fetchOffer = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.HOTELS}${id}`)
     .then(({data: offer}) => {
+      dispatch(setConnectionStatus({
+        type: REQUEST_SOURCE.PAGE,
+        status: CONNECTION_STATUS.WAIT,
+      }));
+
       dispatch(loadOffer(offer));
+
       dispatch(setConnectionStatus({
         type: REQUEST_SOURCE.PAGE,
         status: CONNECTION_STATUS.SUCCESS,
@@ -49,34 +72,44 @@ export const fetchOffer = (id) => (dispatch, _getState, api) => {
     .catch(() => dispatch(setConnectionStatus({
       type: REQUEST_SOURCE.PAGE,
       status: CONNECTION_STATUS.ERROR,
-    })));
-};
+    })))
+);
 
-export const postComment = (id, comment) => (dispatch, _getState, api) => {
-  dispatch(setConnectionStatus({
-    type: REQUEST_SOURCE.COMMENT,
-    status: CONNECTION_STATUS.WAIT,
-  }));
-
+export const postComment = (id, comment) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.COMMENTS}${id}`, comment)
     .then(({data: comments}) => {
+      dispatch(setConnectionStatus({
+        type: REQUEST_SOURCE.COMMENT,
+        status: CONNECTION_STATUS.WAIT,
+      }));
+
       dispatch(loadComments(comments));
+
       dispatch(setConnectionStatus({
         type: REQUEST_SOURCE.COMMENT,
         status: CONNECTION_STATUS.SUCCESS,
       }));
+
       dispatch(setComment(''));
       dispatch(setRating(0));
     })
     .catch(() => dispatch(setConnectionStatus({
       type: REQUEST_SOURCE.COMMENT,
       status: CONNECTION_STATUS.ERROR,
-    })));
-};
+    })))
+);
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
-    .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(({data: user}) => {
+      api.get(APIRoute.FAVORITES)
+        .then(({data: favorites}) => {
+          dispatch(loadFavorites(favorites));
+        });
+
+      dispatch(requireAuthorization(AuthorizationStatus.AUTH));
+      dispatch(setUser(user));
+    })
     .catch(() => {})
 );
 
@@ -98,6 +131,10 @@ export const login = ({login: email, password, activeOffer}) => (dispatch, _getS
         dispatch(redirectToRoute(AppRoute.ROOT));
       }
     })
+    .catch(() => dispatch(setConnectionStatus({
+      type: REQUEST_SOURCE.PAGE,
+      status: CONNECTION_STATUS.ERROR,
+    })))
 );
 
 export const signout = () => (dispatch, _getState, api) => (
@@ -109,7 +146,7 @@ export const signout = () => (dispatch, _getState, api) => (
     })
 );
 
-export const sendFavorite = (id, status) => (dispatch, _getState, api) => {
+export const sendFavorite = (id, status) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.FAVORITES}${id}/${status}`)
     .then(({data}) => dispatch(setFavorite(data)))
     .catch(() => {
@@ -117,5 +154,5 @@ export const sendFavorite = (id, status) => (dispatch, _getState, api) => {
         type: REQUEST_SOURCE.FAVORITE,
         status: CONNECTION_STATUS.ERROR,
       }));
-    });
-};
+    })
+);

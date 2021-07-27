@@ -19,12 +19,6 @@ export const getNearbyOffers = ({DATA}) => DATA.nearbyOffers;
 
 export const getComment = ({DATA}) => DATA.comment;
 
-export const getIsCommentLoaded = ({DATA}) => DATA.isCommentLoaded;
-
-export const getIsDataLoaded = ({DATA}) => DATA.isDataLoaded;
-
-export const getIsFavoriteLoaded = ({DATA}) => DATA.isFavoriteLoaded;
-
 export const getRating = ({DATA}) => DATA.rating;
 
 export const getCityOffers = createSelector(

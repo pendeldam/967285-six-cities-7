@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Router as BrowserRouter} from 'react-router-dom';
+import browserHistory from './browser-history';
 import {Provider} from 'react-redux';
 import {configureStore} from '@reduxjs/toolkit';
-import {requireAuthorization} from './store/action';
+import {requireAuthorization, getErrorInfo} from './store/action';
 import {checkAuth} from './store/api-actions';
 import rootReducer from './store/root-reducer';
 import {redirect} from './store/middlewares/redirect';
@@ -12,6 +14,7 @@ import {AuthorizationStatus} from './const';
 
 const api = createAPI(
   () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)),
+  (error) => store.dispatch(getErrorInfo(error)),
 );
 
 const store = configureStore({
@@ -29,7 +32,9 @@ store.dispatch(checkAuth());
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App/>
+      <BrowserRouter history={browserHistory}>
+        <App/>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.querySelector('#root'),

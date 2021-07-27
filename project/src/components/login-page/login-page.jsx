@@ -1,11 +1,13 @@
 import React, {useRef, useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import {getCity, getActiveOffer} from '../../store/app-data/selectors';
+import {getIsDataLoaded} from '../../store/app-state/selectors';
+import {getAuthorizationStatus} from '../../store/app-user/selectors';
 import {login} from '../../store/api-actions';
 import Header from '../header/header';
-import ErrorPopup from '../error-popup/error-popup';
-import {AppRoute} from '../../const';
+import ErrorPage from '../error-page/error-page';
+import {AppRoute, CONNECTION_STATUS, AuthorizationStatus} from '../../const';
 import {isWrongPassword} from '../../utils';
 
 function LoginPage() {
@@ -16,6 +18,8 @@ function LoginPage() {
   const dispatch = useDispatch();
   const city = useSelector(getCity);
   const activeOffer = useSelector(getActiveOffer);
+  const isDataLoaded = useSelector(getIsDataLoaded);
+  const authorizationStatus = useSelector(getAuthorizationStatus);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -34,6 +38,14 @@ function LoginPage() {
     );
   };
 
+  if (authorizationStatus === AuthorizationStatus.AUTH) {
+    return <Redirect to={AppRoute.ROOT}/>;
+  }
+
+  if (isDataLoaded === CONNECTION_STATUS.ERROR) {
+    return <ErrorPage/>;
+  }
+
   return (
     <div className="page page--gray page--login">
       <Header/>
@@ -48,31 +60,41 @@ function LoginPage() {
               onSubmit={handleSubmit}
             >
               <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden">E-mail</label>
+                <label htmlFor="user-email" className="visually-hidden">E-mail</label>
                 <input
+                  id="user-email"
                   className="login__input form__input"
                   type="email"
                   name="email"
                   placeholder="Email"
                   required
                   ref={loginRef}
+                  data-testid="login"
                 />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden">Password</label>
+                <label htmlFor="user-password" className="visually-hidden">Password</label>
                 <input
+                  id="user-password"
                   className="login__input form__input"
                   type="password"
                   name="password"
                   placeholder="Password"
                   required
                   ref={passRef}
+                  data-testid="password"
                 />
                 {error &&
-                  <ErrorPopup
-                    style={{bottom: '-80px'}}
-                    message={'Passwords with only spaces not allowed'}
-                  />}
+                  <div
+                    style={{
+                      lineHeight: '30px',
+                      textAlign: 'center',
+                      color: 'black',
+                      backgroundColor: 'pink',
+                    }}
+                  >
+                    Passwords with only spaces not allowed
+                  </div>}
               </div>
               <button className="login__submit form__submit button" type="submit">Sign in</button>
             </form>

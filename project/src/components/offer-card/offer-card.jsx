@@ -3,8 +3,8 @@ import {Link} from 'react-router-dom';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
 import offerProps from '../offer-card/offer-card.prop';
 import stylesProp from './styles.prop';
-import {AppRoute} from '../../const';
-import {getRatingStyle} from '../../utils';
+import {AppRoute, RatingPercent} from '../../const';
+import {roundRating} from '../../utils';
 
 function OfferCard({offer, styles}) {
   const {id, price, type, rating, title} = offer;
@@ -27,7 +27,7 @@ function OfferCard({offer, styles}) {
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <span style={{width: getRatingStyle(rating)}}></span>
+          <span style={{width: RatingPercent[roundRating(rating)]}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>
