@@ -17,14 +17,14 @@ function Map({city, offers}) {
 
   const defaultCustomIcon = leaflet.icon({
     iconUrl: URL_MARKER_DEFAULT,
-    iconSize: [30, 30],
-    iconAnchor: [15, 30],
+    iconSize: [27, 39],
+    iconAnchor: [14, 20],
   });
 
   const activeCustomIcon = leaflet.icon({
     iconUrl: URL_MARKER_ACTIVE,
-    iconSize: [30, 30],
-    iconAnchor: [15, 30],
+    iconSize: [27, 39],
+    iconAnchor: [14, 20],
   });
 
   useEffect(() => {
