@@ -124,7 +124,7 @@ export const SortTypes = {
   POPULAR: 'Popular',
   PRICE_LOW_TO_HIGH: 'Price: low to high',
   PRICE_HIGH_TO_LOW: 'Price: high to low',
-  TOP_RATED: 'Top rated firs',
+  TOP_RATED: 'Top rated first',
 };
 
 export const checkFavorite = (offers, id) => {
@@ -140,4 +140,16 @@ export const checkFavorite = (offers, id) => {
 const URL_MARKER_DEFAULT = '../img/pin.svg';
 const URL_MARKER_ACTIVE = '../img/pin-active.svg';
 
-export {URL_MARKER_ACTIVE, URL_MARKER_DEFAULT};
+const MAX_OFFER_IMAGES = 6;
+const MAX_OFFER_COMMENTS = 10;
+const MIN_OFFER_COMMENT_LENGTH = 50;
+const MAX_OFFER_COMMENT_LENGTH = 300;
+
+export {
+  URL_MARKER_ACTIVE,
+  URL_MARKER_DEFAULT,
+  MAX_OFFER_IMAGES,
+  MAX_OFFER_COMMENTS,
+  MIN_OFFER_COMMENT_LENGTH,
+  MAX_OFFER_COMMENT_LENGTH
+};
