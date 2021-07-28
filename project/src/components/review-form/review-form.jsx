@@ -7,7 +7,7 @@ import {setComment, setRating} from '../../store/action';
 import {postComment} from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
 import ErrorPopup from '../error-popup/error-popup';
-import {CONNECTION_STATUS, RatingWords, PopupType} from '../../const';
+import {PopupType, RatingWords, CONNECTION_STATUS, MIN_OFFER_COMMENT_LENGTH, MAX_OFFER_COMMENT_LENGTH} from '../../const';
 
 function ReviewFrom({id}) {
   const dispatch = useDispatch();
@@ -74,7 +74,7 @@ function ReviewFrom({id}) {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={!rating || comment.length < 50 || comment.length > 300}
+          disabled={!rating || comment.length < MIN_OFFER_COMMENT_LENGTH || comment.length > MAX_OFFER_COMMENT_LENGTH}
         >
             Submit
         </button>

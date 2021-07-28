@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import {SortTypes} from '../../const';
+import {SortTypes, MAX_OFFER_COMMENTS} from '../../const';
 
 const getReviews = ({DATA}) => DATA.reviews;
 
@@ -48,5 +48,5 @@ export const getSortedReviews = createSelector(
   [getReviews],
   (reviews) => [...reviews]
     .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .slice(0, 10),
+    .slice(0, MAX_OFFER_COMMENTS),
 );

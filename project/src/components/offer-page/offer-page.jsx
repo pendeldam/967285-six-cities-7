@@ -14,8 +14,8 @@ import FavoriteButton from '../../components/favorite-button/favorite-button';
 import LoadingScreen from '../loading-screen/loading-screen';
 import ErrorPopup from '../error-popup/error-popup';
 import ErrorPage from '../error-page/error-page';
-import {CONNECTION_STATUS, OfferTypes, RatingPercent, PopupType} from '../../const';
 import {roundRating} from '../../utils';
+import {PopupType, OfferTypes, RatingPercent, CONNECTION_STATUS, MAX_OFFER_IMAGES} from '../../const';
 
 function OfferPage() {
   const dispatch = useDispatch();
@@ -51,7 +51,7 @@ function OfferPage() {
             />}
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {offer.images.slice(0, 6).map((image) => (
+              {offer.images.slice(0, MAX_OFFER_IMAGES).map((image) => (
                 <div key={`${image}${offer.id}`} className="property__image-wrapper">
                   <img className="property__image" src={image} alt="Photo studio"/>
                 </div>

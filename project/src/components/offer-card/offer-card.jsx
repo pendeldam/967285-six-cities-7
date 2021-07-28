@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
 import offerProps from '../offer-card/offer-card.prop';
 import stylesProp from './styles.prop';
-import {AppRoute, RatingPercent} from '../../const';
+import {AppRoute, RatingPercent, OfferTypes} from '../../const';
 import {roundRating} from '../../utils';
 
 function OfferCard({offer, styles}) {
@@ -34,7 +34,7 @@ function OfferCard({offer, styles}) {
       <h2 className="place-card__name">
         {<Link to={`${AppRoute.OFFER}/${id}`}>{title}</Link>}
       </h2>
-      <p className="place-card__type">{type}</p>
+      <p className="place-card__type">{OfferTypes[type]}</p>
     </div>
   );
 }
